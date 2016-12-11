@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bezierView.createAnimation();
+                bezierView.createInAnimation();
             }
         });
 
         initPoint();
 
         bezierView.setCircleBeen(circleBeanList);
-        bezierView.createAnimation();
+//        bezierView.createInAnimation();
     }
 
     private void initPoint() {
@@ -51,14 +51,59 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "initPoint: " + centerX + "----" + centerY);
 
-        CircleBean circleBean = new CircleBean(new Point(-180, 900), new Point(700, 900), new Point(centerX - 30, centerY - 120), 42, 60);
-        CircleBean circleBean2 = new CircleBean(new Point(-180, 1114), new Point(1200, 1000), new Point(centerX - 20, centerY - 10), 90, 60);
-        CircleBean circleBean3 = new CircleBean(new Point(-60, 1234), new Point(1000, 900), new Point(centerX - 100, centerY + 100), 24, 60);
+        CircleBean circleBean = new CircleBean(
+                new Point(-width / 4, hight * 3 / 5),
+                new Point(centerX - 30, hight * 3 / 5),
+                new Point(centerX - 30, centerY - 120),
+                new Point(width / 6, centerY - 120),
+                new Point(width / 6, 0),
+                100, 60);
+        CircleBean circleBean2 = new CircleBean(
+                new Point(-width / 4, hight * 4 / 6),
+                new Point(centerX - 20, hight * 4 / 6),
+                new Point(centerX - 20, centerY - 10),
+                new Point(width / 3, centerY - 10),
+                new Point(width / 3, -hight * 5 / 27),
+                130, 60);
+        CircleBean circleBean3 = new CircleBean(
+                new Point(-width / 12, hight * 5 / 7),
+                new Point(centerX - 100, hight * 5 / 7),
+                new Point(centerX - 100, centerY + 100),
+                new Point(0, centerY + 100),
+                new Point(0, 0),
+                80, 60);
 
-        CircleBean circleBean4 = new CircleBean(new Point(530, 1454), new Point(1000, 900), new Point(centerX, centerY), 120, 60);
+        CircleBean circleBean4 = new CircleBean(
+                new Point(-width / 12, hight * 4 / 5),
+                new Point(centerX, hight * 4 / 5),
+                new Point(centerX, centerY),
+                new Point(width / 2, centerY),
+                new Point(width / 2, -hight / 7),
+                200, 60);
 
-        CircleBean circleBean5 = new CircleBean(new Point(870, 1294), new Point(1000, 900), new Point(centerX, centerY - 20), 150, 60);
-        CircleBean circleBean6 = new CircleBean(new Point(824, 1080), new Point(1000, 900), new Point(centerX + 20, centerY + 10), 54, 60);
+        CircleBean circleBean5 = new CircleBean(
+                new Point(width * 5 / 7, hight * 4 / 5),
+                new Point(centerX, hight * 4 / 5),
+                new Point(centerX, centerY - 20),
+                new Point(width * 10 / 13, centerY - 20),
+                new Point(width * 10 / 13, -hight * 2 / 13),
+                260, 60);
+        CircleBean circleBean6 = new CircleBean(
+                new Point(width + width / 5, hight * 3 / 4),
+                new Point(centerX + 20, hight * 3 / 4),
+                new Point(centerX + 20, centerY + 10),
+                new Point(width * 11 / 14, centerY + 10),
+
+                new Point(width * 11 / 14, -hight * 5 / 27),
+                70, 60);
+        CircleBean circleBean7 = new CircleBean(
+                new Point(width + width / 7, hight * 5 / 8),
+                new Point(centerX + 20, hight * 5 / 8),
+                new Point(centerX + 20, centerY + 10),
+                new Point(width, centerY + 10),
+
+                new Point(width, 0),
+                100, 60);
 
         circleBeanList.add(circleBean);
         circleBeanList.add(circleBean2);
@@ -66,5 +111,6 @@ public class MainActivity extends AppCompatActivity {
         circleBeanList.add(circleBean4);
         circleBeanList.add(circleBean5);
         circleBeanList.add(circleBean6);
+        circleBeanList.add(circleBean7);
     }
 }
