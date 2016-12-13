@@ -30,6 +30,7 @@
         android:layout_height="match_parent" />
 
     <TextView
+        android:layout_marginBottom="33dp"
         android:alpha="0"
         android:id="@+id/center_tv"
         android:textSize="40sp"
@@ -38,5 +39,6 @@
         android:text="红小宝"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 
 </FrameLayout>

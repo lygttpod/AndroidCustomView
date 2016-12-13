@@ -34,13 +34,13 @@ public class CircleBean {
     /**
      * 小球半径
      */
-    private int radius;
+    private float radius;
     /**
      * 圆圈的透明度
      */
     private int alpha;
 
-    public CircleBean(Point p0, Point p1, Point p2, int radius, int alpha) {
+    public CircleBean(Point p0, Point p1, Point p2, float radius, int alpha) {
         this.p0 = p0;
         this.p1 = p1;
         this.p2 = p2;
@@ -48,7 +48,7 @@ public class CircleBean {
         this.alpha = alpha;
     }
 
-    public CircleBean(Point p0, Point p1, Point p2, Point p4, int radius, int alpha) {
+    public CircleBean(Point p0, Point p1, Point p2, Point p4, float radius, int alpha) {
         this.p0 = p0;
         this.p1 = p1;
         this.p2 = p2;
@@ -57,7 +57,7 @@ public class CircleBean {
         this.alpha = alpha;
     }
 
-    public CircleBean(Point p0, Point p1, Point p2, Point p3, Point p4, int radius, int alpha) {
+    public CircleBean(Point p0, Point p1, Point p2, Point p3, Point p4, float radius, int alpha) {
         this.p0 = p0;
         this.p1 = p1;
         this.p2 = p2;
@@ -126,11 +126,11 @@ public class CircleBean {
         this.p4 = p4;
     }
 
-    public int getRadius() {
+    public float getRadius() {
         return radius;
     }
 
-    public void setRadius(int radius) {
+    public void setRadius(float radius) {
         this.radius = radius;
     }
 }

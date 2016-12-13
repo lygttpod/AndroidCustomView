@@ -11,6 +11,7 @@ import android.graphics.PathMeasure;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
 import com.allen.androidcustomview.R;
@@ -127,11 +128,11 @@ public class BubbleView extends View {
      */
     private Shader getColorShader(CircleBean circleBean) {
 
-        float x0 = circleBean.getP().getX()- circleBean.getRadius();
-        float y0 = circleBean.getP().getY() ;
+        float x0 = circleBean.getP().getX() - circleBean.getRadius();
+        float y0 = circleBean.getP().getY();
 
-        float x1 = circleBean.getP().getX()+ circleBean.getRadius();
-        float y1 = circleBean.getP().getY() ;
+        float x1 = circleBean.getP().getX() + circleBean.getRadius();
+        float y1 = circleBean.getP().getY();
 
 
         Shader shader = new LinearGradient(x0, y0, x1, y1, colors, positions, Shader.TileMode.MIRROR);
@@ -145,7 +146,17 @@ public class BubbleView extends View {
     public void openAnimation() {
         if (!animatorSet.isRunning()) {
             animatorSet.play(floatAnimation()).after(inAnimation()).before(outAnimation());
+//            animatorSet.playTogether(floatAnimation());
             animatorSet.start();
+        }
+    }
+
+    /**
+     * 关闭动画
+     */
+    public void stopAnimation() {
+        if (animatorSet.isRunning()) {
+            animatorSet.cancel();
         }
     }
 
@@ -158,7 +169,7 @@ public class BubbleView extends View {
 
         ValueAnimator startAnimator = ValueAnimator.ofFloat(0, 1);
         startAnimator.setDuration(800);
-        startAnimator.setInterpolator(new DecelerateInterpolator());
+        startAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         startAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -168,12 +179,12 @@ public class BubbleView extends View {
                     float x = (float) (Math.pow((1 - t), 2) * c.getP0().getX() + 2 * t * (1 - t) * c.getP1().getX() + Math.pow(t, 2) * c.getP2().getX());
                     float y = (float) (Math.pow((1 - t), 2) * c.getP0().getY() + 2 * t * (1 - t) * c.getP1().getY() + Math.pow(t, 2) * c.getP2().getY());
 
-                    c.setAlpha((int) (t*100));
+                    c.setAlpha((int) (t * 100));
 
                     mCircleBeen.get(i).setP(new Point(x, y));
-                    if (t>0.5){
+                    if (t > 0.5) {
                         getCenterImg().setAlpha(t);
-                    }else {
+                    } else {
                         getCenterImg().setAlpha(0);
                     }
                 }
@@ -209,6 +220,7 @@ public class BubbleView extends View {
 
         ValueAnimator floatAnimator = ValueAnimator.ofFloat(0, 1);
         floatAnimator.setDuration(3000);
+        floatAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         floatAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -219,8 +231,8 @@ public class BubbleView extends View {
                     mCircleBeen.get(i).setP(new Point(pos[0], pos[1]));
                 }
 
-                if (t>0.3){
-                    getCenterImg().setAlpha((float) ((1-t)+0.3));
+                if (t > 0.3) {
+                    getCenterImg().setAlpha((float) ((1 - t) + 0.3));
                 }
                 invalidate();
             }
@@ -259,10 +271,11 @@ public class BubbleView extends View {
 
     /**
      * 设置上下左右浮动的振幅
+     *
      * @param amplitude 振幅值
      * @return 返回
      */
-    private BubbleView setAmplitude(int amplitude){
+    private BubbleView setAmplitude(int amplitude) {
         this.amplitude = amplitude;
         return this;
     }
