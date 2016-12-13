@@ -6,11 +6,29 @@ package com.allen.androidcustomview.bean;
 
 public class CircleBean {
 
+    /**
+     * 真实轨迹坐标点
+     */
     Point p;
+    /**
+     * 起点坐标
+     */
     Point p0;
+    /**
+     * 进入动画的控制点坐标
+     */
     Point p1;
+    /**
+     * 到达中心点做坐标
+     */
     Point p2;
+    /**
+     * 飞出动画控制点的坐标
+     */
     Point p3;
+    /**
+     * 结束位置坐标
+     */
     Point p4;
 
     /**

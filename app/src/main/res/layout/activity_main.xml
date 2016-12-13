@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <Button
-        android:text="开启动画"
         android:id="@+id/start_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@null"
+        android:text="开启动画" />
 
-    <com.allen.androidcustomview.widget.BezierView
+    <ImageView
+        android:visibility="gone"
+        android:alpha="0"
+        android:id="@+id/hxb_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@mipmap/start_logo_group" />
+
+
+
+    <com.allen.androidcustomview.widget.BubbleView
         android:id="@+id/circle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:alpha="0"
+        android:id="@+id/center_tv"
+        android:textSize="40sp"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:text="红小宝"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </FrameLayout>
