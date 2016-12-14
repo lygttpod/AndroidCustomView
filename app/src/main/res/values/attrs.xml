@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WaveView">
+
+        <attr name="waveStartColor" format="color" />
+        <attr name="waveEndColor" format="color" />
+        <attr name="waveLength" format="dimension" />
+        <attr name="waveDuration" format="dimension" />
+        <attr name="waveAmplitude" format="dimension" />
+
+        <attr name="mWaveFillTop" format="boolean" />
+        <attr name="mWaveFillBottom" format="boolean" />
+
+    </declare-styleable>
+
+
+</resources>

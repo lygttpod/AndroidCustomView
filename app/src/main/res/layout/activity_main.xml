@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wave="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,14 +15,13 @@
         android:text="开启动画" />
 
     <ImageView
-        android:visibility="gone"
-        android:alpha="0"
         android:id="@+id/hxb_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@mipmap/start_logo_group" />
-
+        android:alpha="0"
+        android:src="@mipmap/start_logo_group"
+        android:visibility="gone" />
 
 
     <com.allen.androidcustomview.widget.BubbleView
@@ -30,15 +30,37 @@
         android:layout_height="match_parent" />
 
     <TextView
+        android:id="@+id/center_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="33dp"
         android:alpha="0"
-        android:id="@+id/center_tv"
-        android:textSize="40sp"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center"
         android:text="红小宝"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="@android:color/white"
+        android:textSize="40sp" />
+
+    <com.allen.androidcustomview.widget.WaveView
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:visibility="gone"
+        wave:waveEndColor="@color/colorPrimary"
+        wave:waveLength="300dp"
+        wave:waveStartColor="@color/circle_start" />
+
+    <com.allen.androidcustomview.widget.WaveView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:visibility="gone"
+        wave:waveEndColor="@color/colorAccent"
+        wave:waveLength="350dp"
+        wave:waveStartColor="@color/colorAccent" />
+
+    <com.allen.androidcustomview.widget.WaveView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        wave:waveAmplitude="20dp"
+        wave:waveLength="350dp" />
 
 
 </FrameLayout>
