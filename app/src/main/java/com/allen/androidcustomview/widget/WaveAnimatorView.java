@@ -20,7 +20,7 @@ import com.allen.androidcustomview.R;
  * 波浪动画
  */
 
-public class WaveView extends View {
+public class WaveAnimatorView extends View {
 
     /**
      * 上下文对象
@@ -110,15 +110,24 @@ public class WaveView extends View {
     private boolean mWaveFillBottom;
 
 
-    public WaveView(Context context) {
+    private static final int SIN = 0;
+    private static final int COS = 1;
+    private static final int SIN_AND_COS = 2;
+
+    /**
+     * 水波类型 sin或者cos
+     */
+    private int mWaveType;
+
+    public WaveAnimatorView(Context context) {
         this(context, null);
     }
 
-    public WaveView(Context context, AttributeSet attrs) {
+    public WaveAnimatorView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WaveView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WaveAnimatorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         mWaveDefaultStartColor = getResources().getColor(R.color.wave_start);
@@ -128,16 +137,17 @@ public class WaveView extends View {
     }
 
     private void getAttr(AttributeSet attrs) {
-        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.WaveView);
+        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.WaveAnimatorView);
 
-        mWaveLength = typedArray.getDimensionPixelOffset(R.styleable.WaveView_waveLength, mdefaultWaveLength);
-        mWaveDuration = typedArray.getDimensionPixelOffset(R.styleable.WaveView_waveDuration, 2000);
-        mWaveAmplitude = typedArray.getDimensionPixelOffset(R.styleable.WaveView_waveAmplitude, dip2px(mContext, 20));
-        mWaveStartColor = typedArray.getColor(R.styleable.WaveView_waveStartColor, mWaveDefaultStartColor);
-        mWaveEndColor = typedArray.getColor(R.styleable.WaveView_waveEndColor, mWaveDefaultEndColor);
+        mWaveLength = typedArray.getDimensionPixelOffset(R.styleable.WaveAnimatorView_waveLength, mdefaultWaveLength);
+        mWaveDuration = typedArray.getInt(R.styleable.WaveAnimatorView_waveDuration, 2000);
+        mWaveType = typedArray.getInt(R.styleable.WaveAnimatorView_waveType, SIN);
+        mWaveAmplitude = typedArray.getDimensionPixelOffset(R.styleable.WaveAnimatorView_waveAmplitude, dip2px(mContext, 20));
+        mWaveStartColor = typedArray.getColor(R.styleable.WaveAnimatorView_waveStartColor, mWaveDefaultStartColor);
+        mWaveEndColor = typedArray.getColor(R.styleable.WaveAnimatorView_waveEndColor, mWaveDefaultEndColor);
 
-        mWaveFillTop = typedArray.getBoolean(R.styleable.WaveView_mWaveFillTop, true);
-        mWaveFillBottom = typedArray.getBoolean(R.styleable.WaveView_mWaveFillBottom, false);
+        mWaveFillTop = typedArray.getBoolean(R.styleable.WaveAnimatorView_waveFillTop, true);
+        mWaveFillBottom = typedArray.getBoolean(R.styleable.WaveAnimatorView_waveFillBottom, false);
 
         typedArray.recycle();
     }
@@ -175,7 +185,7 @@ public class WaveView extends View {
 
         mWaveCount = (int) Math.round(mScreenWidth / mWaveLength + 1.5);
 
-        mCenterY = mScreenHeight - mWaveAmplitude;
+        mCenterY = mScreenHeight*3/4;
 
     }
 
@@ -186,16 +196,49 @@ public class WaveView extends View {
         mShader = new LinearGradient(0, 0, getWidth(), 0, colors, null, Shader.TileMode.CLAMP);
         mWavePaint.setShader(mShader);
 
-        drawWave(canvas);
+        switch (mWaveType){
+            case SIN:
+                drawWaveSin(canvas);
+                break;
+            case COS:
+                drawWaveCos(canvas);
+                break;
+            case SIN_AND_COS:
+                drawWaveSin(canvas);
+                drawWaveCos(canvas);
+        }
     }
 
-    private void drawWave(Canvas canvas) {
+    /**
+     * 类似cos函数的波形
+     * @param canvas 画笔
+     */
+    private void drawWaveCos(Canvas canvas) {
         mWavePath.reset();
         mWavePath.moveTo(-mWaveLength + mOffset, mCenterY);
 
         for (int i = 0; i < mWaveCount; i++) {
             mWavePath.quadTo((-mWaveLength * 3 / 4) + (i * mWaveLength) + mOffset, mCenterY + mWaveAmplitude, (-mWaveLength / 2) + (i * mWaveLength) + mOffset, mCenterY);
             mWavePath.quadTo((-mWaveLength / 4) + (i * mWaveLength) + mOffset, mCenterY - mWaveAmplitude, i * mWaveLength + mOffset, mCenterY);
+        }
+        if (mWaveFillTop) {
+            fillTop();
+        }
+
+        canvas.drawPath(mWavePath, mWavePaint);
+    }
+
+    /**
+     * 类似sin函数的波形
+     * @param canvas 画笔
+     */
+    private void drawWaveSin(Canvas canvas) {
+        mWavePath.reset();
+        mWavePath.moveTo(-mWaveLength + mOffset, mCenterY);
+
+        for (int i = 0; i < mWaveCount; i++) {
+            mWavePath.quadTo((-mWaveLength * 3 / 4) + (i * mWaveLength) + mOffset, mCenterY - mWaveAmplitude, (-mWaveLength / 2) + (i * mWaveLength) + mOffset, mCenterY);
+            mWavePath.quadTo((-mWaveLength / 4) + (i * mWaveLength) + mOffset, mCenterY + mWaveAmplitude, i * mWaveLength + mOffset, mCenterY);
         }
         if (mWaveFillTop) {
             fillTop();

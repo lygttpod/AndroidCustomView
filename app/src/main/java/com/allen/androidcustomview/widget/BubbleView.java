@@ -8,6 +8,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.graphics.PointF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.bean.CircleBean;
-import com.allen.androidcustomview.bean.Point;
+import com.allen.androidcustomview.utils.BezierUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,17 @@ public class BubbleView extends View {
         this.mCircleBeen = circleBeen;
     }
 
+    public OnBubbleAnimationListener onBubbleAnimationListener;
+
+    public void setOnBubbleAnimationListener(OnBubbleAnimationListener onBubbleAnimationListener) {
+        this.onBubbleAnimationListener = onBubbleAnimationListener;
+    }
+
+    public abstract static class OnBubbleAnimationListener {
+
+        public abstract void onCompletedAnimationListener();
+
+    }
 
     public BubbleView(Context context) {
         super(context);
@@ -114,7 +126,7 @@ public class BubbleView extends View {
                 for (CircleBean circleBean : getCircleBeen()) {
                     paint.setShader(getColorShader(circleBean));
                     paint.setAlpha(circleBean.getAlpha());
-                    canvas.drawCircle(circleBean.getP().getX(), circleBean.getP().getY(), circleBean.getRadius(), paint);
+                    canvas.drawCircle(circleBean.getP().x, circleBean.getP().y, circleBean.getRadius(), paint);
                 }
             }
         }
@@ -128,11 +140,11 @@ public class BubbleView extends View {
      */
     private Shader getColorShader(CircleBean circleBean) {
 
-        float x0 = circleBean.getP().getX() - circleBean.getRadius();
-        float y0 = circleBean.getP().getY();
+        float x0 = circleBean.getP().x - circleBean.getRadius();
+        float y0 = circleBean.getP().y;
 
-        float x1 = circleBean.getP().getX() + circleBean.getRadius();
-        float y1 = circleBean.getP().getY();
+        float x1 = circleBean.getP().x + circleBean.getRadius();
+        float y1 = circleBean.getP().y;
 
 
         Shader shader = new LinearGradient(x0, y0, x1, y1, colors, positions, Shader.TileMode.MIRROR);
@@ -176,16 +188,14 @@ public class BubbleView extends View {
                 float t = (Float) valueAnimator.getAnimatedValue();
                 for (int i = 0; i < mCircleBeen.size(); i++) {
                     CircleBean c = mCircleBeen.get(i);
-                    float x = (float) (Math.pow((1 - t), 2) * c.getP0().getX() + 2 * t * (1 - t) * c.getP1().getX() + Math.pow(t, 2) * c.getP2().getX());
-                    float y = (float) (Math.pow((1 - t), 2) * c.getP0().getY() + 2 * t * (1 - t) * c.getP1().getY() + Math.pow(t, 2) * c.getP2().getY());
+                    PointF pointF = BezierUtil.CalculateBezierPointForQuadratic(t, c.getP0(), c.getP1(), c.getP2());
+                    mCircleBeen.get(i).setP(pointF);
 
                     c.setAlpha((int) (t * 100));
-
-                    mCircleBeen.get(i).setP(new Point(x, y));
                     if (t > 0.5) {
-                        getCenterImg().setAlpha(t);
+                        setCenterViewAlpha(t);
                     } else {
-                        getCenterImg().setAlpha(0);
+                        setCenterViewAlpha(0);
                     }
                 }
 
@@ -209,9 +219,9 @@ public class BubbleView extends View {
         for (int i = 0; i < mCircleBeen.size(); i++) {
             Path path = new Path();
             if (i % 2 == 0) {
-                path.addCircle(mCircleBeen.get(i).getP2().getX() - amplitude, mCircleBeen.get(i).getP2().getY(), amplitude, Path.Direction.CCW);
+                path.addCircle(mCircleBeen.get(i).getP2().x - amplitude, mCircleBeen.get(i).getP2().y, amplitude, Path.Direction.CCW);
             } else {
-                path.addCircle(mCircleBeen.get(i).getP2().getX() - amplitude, mCircleBeen.get(i).getP2().getY(), amplitude, Path.Direction.CW);
+                path.addCircle(mCircleBeen.get(i).getP2().x - amplitude, mCircleBeen.get(i).getP2().y, amplitude, Path.Direction.CW);
             }
             PathMeasure pathMeasure = new PathMeasure();
             pathMeasure.setPath(path, true);
@@ -228,11 +238,11 @@ public class BubbleView extends View {
 
                 for (int i = 0; i < mCircleBeen.size(); i++) {
                     pathMeasures.get(i).getPosTan(pathMeasures.get(i).getLength() * t, pos, tan);
-                    mCircleBeen.get(i).setP(new Point(pos[0], pos[1]));
+                    mCircleBeen.get(i).setP(new PointF(pos[0], pos[1]));
                 }
 
                 if (t > 0.3) {
-                    getCenterImg().setAlpha((float) ((1 - t) + 0.3));
+                    setCenterViewAlpha((float) ((1 - t) + 0.3));
                 }
                 invalidate();
             }
@@ -252,21 +262,29 @@ public class BubbleView extends View {
         outAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                getCenterImg().setAlpha(0);
-
+                setCenterViewAlpha(0);
                 float t = (Float) valueAnimator.getAnimatedValue();
                 for (int i = 0; i < mCircleBeen.size(); i++) {
                     CircleBean c = mCircleBeen.get(i);
-                    float x = (float) (Math.pow((1 - t), 2) * c.getP2().getX() + 2 * t * (1 - t) * c.getP3().getX() + Math.pow(t, 2) * c.getP4().getX());
-                    float y = (float) (Math.pow((1 - t), 2) * c.getP2().getY() + 2 * t * (1 - t) * c.getP3().getY() + Math.pow(t, 2) * c.getP4().getY());
-
+                    PointF pointF = BezierUtil.CalculateBezierPointForQuadratic(t, c.getP2(), c.getP3(), c.getP4());
+                    mCircleBeen.get(i).setP(pointF);
                     c.setAlpha((int) ((1 - t) * 100));
-                    mCircleBeen.get(i).setP(new Point(x, y));
                 }
                 invalidate();
+                if (1==t){
+                    if (onBubbleAnimationListener!=null){
+                        onBubbleAnimationListener.onCompletedAnimationListener();
+                    }
+                }
             }
         });
         return outAnimator;
+    }
+
+    private void setCenterViewAlpha(float alpha) {
+        if (getCenterImg()!=null){
+            getCenterImg().setAlpha(alpha);
+        }
     }
 
     /**

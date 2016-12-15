@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="WaveView">
+    <declare-styleable name="WaveAnimatorView">
 
         <attr name="waveStartColor" format="color" />
         <attr name="waveEndColor" format="color" />
         <attr name="waveLength" format="dimension" />
-        <attr name="waveDuration" format="dimension" />
+        <attr name="waveDuration" format="integer" />
         <attr name="waveAmplitude" format="dimension" />
+        <attr name="waveStartOffset" format="dimension" />
 
-        <attr name="mWaveFillTop" format="boolean" />
-        <attr name="mWaveFillBottom" format="boolean" />
+        <attr name="waveFillTop" format="boolean" />
+        <attr name="waveFillBottom" format="boolean" />
 
+        <attr name="waveType" format="enum">
+            <enum name="sin" value="0" />
+            <enum name="cos" value="1" />
+            <enum name="sin_and_cos" value="2" />
+        </attr>
     </declare-styleable>
 
 

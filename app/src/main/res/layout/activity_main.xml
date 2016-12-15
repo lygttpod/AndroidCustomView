@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:wave="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include layout="@layout/wave_layout" />
+
 
     <Button
         android:id="@+id/start_btn"
@@ -39,28 +41,6 @@
         android:text="红小宝"
         android:textColor="@android:color/white"
         android:textSize="40sp" />
-
-    <com.allen.androidcustomview.widget.WaveView
-        android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:visibility="gone"
-        wave:waveEndColor="@color/colorPrimary"
-        wave:waveLength="300dp"
-        wave:waveStartColor="@color/circle_start" />
-
-    <com.allen.androidcustomview.widget.WaveView
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:visibility="gone"
-        wave:waveEndColor="@color/colorAccent"
-        wave:waveLength="350dp"
-        wave:waveStartColor="@color/colorAccent" />
-
-    <com.allen.androidcustomview.widget.WaveView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        wave:waveAmplitude="20dp"
-        wave:waveLength="350dp" />
 
 
 </FrameLayout>

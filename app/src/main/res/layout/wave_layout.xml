@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wave="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+        <com.allen.androidcustomview.widget.WaveAnimatorView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            wave:waveAmplitude="40dp"
+            wave:waveDuration="4000"
+            wave:waveLength="400dp"
+            wave:waveType="cos" />
+
+
+        <com.allen.androidcustomview.widget.WaveAnimatorView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            wave:waveAmplitude="30dp"
+            wave:waveDuration="3500"
+            wave:waveLength="500dp"
+            wave:waveType="cos" />
+
+        <com.allen.androidcustomview.widget.WaveAnimatorView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            wave:waveAmplitude="30dp"
+            wave:waveDuration="3500"
+            wave:waveLength="380dp"
+            wave:waveType="sin" />
+
+        <!--<com.allen.androidcustomview.widget.WaveView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--wave:waveAmplitude="30dp"-->
+        <!--wave:waveDuration="3000"-->
+        <!--wave:waveLength="450dp"-->
+        <!--wave:waveType="cos" />-->
+    </FrameLayout>
+</LinearLayout>
