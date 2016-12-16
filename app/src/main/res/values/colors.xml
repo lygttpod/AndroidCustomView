@@ -8,10 +8,15 @@
     <color name="circle_start">#fa7832</color>
     <color name="circle_end">#eb4438</color>
 
-    <color name="wave_start">#CCFF7E37</color>
-    <color name="wave_end">#ccEB4438</color>
+    <color name="wave_start">#aaFF7E37</color>
+    <color name="wave_end">#aaEB4438</color>
 
 
     <color name="wave_color">#09FFFFFF</color>
 
+    <color name="wave_start1">#CCFF7E37</color>
+    <color name="wave_end1">#ccEB4438</color>
+
+    <color name="wave_start2">#80FF7E37</color>
+    <color name="wave_end2">#80EB4438</color>
 </resources>

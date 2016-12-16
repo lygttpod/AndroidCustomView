@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.allen.androidcustomview.bean.CircleBean;
 import com.allen.androidcustomview.utils.DisplayUtils;
 import com.allen.androidcustomview.widget.BubbleView;
+import com.allen.androidcustomview.widget.WaveViewByBezier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     private List<CircleBean> circleBeanList = new ArrayList<>();
 
+    private WaveViewByBezier waveView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        waveView = (WaveViewByBezier) findViewById(R.id.wave);
         hxbIv = (ImageView) findViewById(R.id.hxb_iv);
         hxbTv = (TextView) findViewById(R.id.center_tv);
         bezierView = (BubbleView) findViewById(R.id.circle_view);
@@ -140,4 +143,18 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+        waveView.startAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+        waveView.stopAnimation();
+    }
 }

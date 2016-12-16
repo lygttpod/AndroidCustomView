@@ -5,7 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/wave_layout" />
+    <!--<include layout="@layout/wave_layout" />-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        >
+
+        <com.allen.androidcustomview.widget.WaveViewBySinCos
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="100dp" />
+
+    </FrameLayout>
+
+
+    <com.allen.androidcustomview.widget.WaveViewByBezier
+        android:visibility="gone"
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
     <Button

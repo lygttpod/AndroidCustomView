@@ -9,10 +9,13 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.allen.androidcustomview.R;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by allen on 2016/12/13.
@@ -139,7 +142,7 @@ public class WaveAnimatorView extends View {
     private void getAttr(AttributeSet attrs) {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.WaveAnimatorView);
 
-        mWaveLength = typedArray.getDimensionPixelOffset(R.styleable.WaveAnimatorView_waveLength, mdefaultWaveLength);
+        mWaveLength = typedArray.getDimensionPixelOffset(R.styleable.WaveAnimatorView_waveLength, dip2px(mContext, mdefaultWaveLength));
         mWaveDuration = typedArray.getInt(R.styleable.WaveAnimatorView_waveDuration, 2000);
         mWaveType = typedArray.getInt(R.styleable.WaveAnimatorView_waveType, SIN);
         mWaveAmplitude = typedArray.getDimensionPixelOffset(R.styleable.WaveAnimatorView_waveAmplitude, dip2px(mContext, 20));
@@ -184,7 +187,7 @@ public class WaveAnimatorView extends View {
         mScreenWidth = w;
 
         mWaveCount = (int) Math.round(mScreenWidth / mWaveLength + 1.5);
-
+        Log.d(TAG, "onSizeChanged: ======="+mWaveCount);
         mCenterY = mScreenHeight*3/4;
 
     }
@@ -273,8 +276,8 @@ public class WaveAnimatorView extends View {
 
         ValueAnimator waveAnimator = ValueAnimator.ofInt(0, mWaveLength);
         waveAnimator.setDuration(mWaveDuration);
-        waveAnimator.setRepeatCount(ValueAnimator.INFINITE);
         waveAnimator.setInterpolator(new LinearInterpolator());
+        waveAnimator.setRepeatCount(ValueAnimator.INFINITE);
         waveAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
