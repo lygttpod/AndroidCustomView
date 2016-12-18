@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+=======
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+>>>>>>> 0c68f7e72be5dbd20ce25c0dc035173e55620d03
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--<include layout="@layout/wave_layout" />-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        >
+
+        <com.allen.androidcustomview.widget.WaveViewBySinCos
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="100dp" />
+
+    </FrameLayout>
+
+
+    <com.allen.androidcustomview.widget.WaveViewByBezier
+        android:visibility="gone"
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <Button
+<<<<<<< HEAD
         android:id="@+id/bubble_view_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,3 +50,40 @@
         android:layout_height="wrap_content"
         android:text="波浪动画--正余弦函数实现" />
 </LinearLayout>
+=======
+        android:id="@+id/start_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@null"
+        android:text="开启动画" />
+
+    <ImageView
+        android:id="@+id/hxb_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:src="@mipmap/start_logo_group"
+        android:visibility="gone" />
+
+
+    <com.allen.androidcustomview.widget.BubbleView
+        android:id="@+id/circle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/center_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="33dp"
+        android:alpha="0"
+        android:text="红小宝"
+        android:textColor="@android:color/white"
+        android:textSize="40sp" />
+
+
+</FrameLayout>
+>>>>>>> 0c68f7e72be5dbd20ce25c0dc035173e55620d03

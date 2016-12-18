@@ -118,10 +118,10 @@ public class WaveViewBySinCos extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mShader1 == null) {
+        if (mShader1==null){
             mShader1 = new LinearGradient(0, 0, getWidth(), 0, colors1, null, Shader.TileMode.CLAMP);
         }
-        if (mShader2 == null) {
+        if (mShader2==null){
             mShader2 = new LinearGradient(0, 0, getWidth(), 0, colors2, null, Shader.TileMode.CLAMP);
         }
 //        φ -= 0.1f;
@@ -136,11 +136,11 @@ public class WaveViewBySinCos extends View {
 
             for (float x = 0; x <= getWidth(); x += 20) {
                 if (i % 2 == 0) {
-                    y = (float) (A * Math.cos(ω * x + φ) + K + 20 * (i + 1));
+                    y = (float) (A* Math.cos(ω * x + φ) + K + 20*(i+1));
                 } else {
-                    y = (float) ((A + (2 * (i + 1))) * Math.sin(ω * x + φ) + K);
+                    y = (float) ((A+(2*(i+1))) * Math.sin(ω * x + φ) + K);
                 }
-                mPaths.get(i).lineTo(x + mOffset, y);
+                mPaths.get(i).lineTo(x+mOffset, y);
             }
 
             mPaints.get(i).setShader(mShader1);

@@ -144,8 +144,8 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
         mWavePath.moveTo(mOffset, mCenterY);
 
         for (int i = 0; i < mWaveCount; i++) {
-            mWavePath.quadTo(getWidth() /4+ mOffset, mCenterY + 60, getWidth() / 2 + mOffset, mCenterY);
-            mWavePath.quadTo(getWidth() *3/ 4 + mOffset, mCenterY - 60, getWidth()+ mOffset, mCenterY);
+            mWavePath.quadTo(mWaveLength /4+ mOffset, mCenterY + 60, mWaveLength / 2 + mOffset, mCenterY);
+            mWavePath.quadTo(mWaveLength *3/ 4 + mOffset, mCenterY - 60,  + mOffset, mCenterY);
         }
         mWavePath.lineTo(mScreenWidth, mScreenHeight);
         mWavePath.lineTo(0, mScreenHeight);
