@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <Button
-        android:text="开启动画"
-        android:id="@+id/start_btn"
+        android:id="@+id/bubble_view_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="气泡漂浮动画" />
 
-    <com.allen.androidcustomview.widget.BezierView
-        android:id="@+id/circle_view"
+    <Button
+        android:id="@+id/wave_view_by_bezier_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:text="波浪动画--贝塞尔曲线实现" />
+
+    <Button
+        android:id="@+id/wave_view_by_sin_cos_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="波浪动画--正余弦函数实现" />
+</LinearLayout>

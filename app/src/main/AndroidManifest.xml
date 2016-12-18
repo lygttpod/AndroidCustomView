@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".BubbleViewActivity" />
+        <activity android:name=".WaveByBezierActivity" />
+        <activity android:name=".WaveBySinCosActivity"></activity>
     </application>
 
 </manifest>

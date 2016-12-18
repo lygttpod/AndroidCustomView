@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_wave_by_sin_cos"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.allen.androidcustomview.widget.WaveViewBySinCos
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+</LinearLayout>
