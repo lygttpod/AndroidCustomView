@@ -22,5 +22,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="波浪动画--正余弦函数实现" />
+
+    <Button
+        android:id="@+id/radar_view_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="水波（雷达）扩散效果" />
+    <Button
+        android:id="@+id/tag_view_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RecyclerView实现另类的Tag标签" />
+
 </LinearLayout>
 

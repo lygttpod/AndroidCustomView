@@ -17,7 +17,9 @@
         </activity>
         <activity android:name=".BubbleViewActivity" />
         <activity android:name=".WaveByBezierActivity" />
-        <activity android:name=".WaveBySinCosActivity"></activity>
+        <activity android:name=".WaveBySinCosActivity" />
+        <activity android:name=".RadarActivity" />
+        <activity android:name=".tagview.TagActivity"></activity>
     </application>
 
 </manifest>
