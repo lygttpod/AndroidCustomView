@@ -19,7 +19,8 @@
         <activity android:name=".WaveByBezierActivity" />
         <activity android:name=".WaveBySinCosActivity" />
         <activity android:name=".RadarActivity" />
-        <activity android:name=".tagview.TagActivity"></activity>
+        <activity android:name=".tagview.TagActivity" />
+        <activity android:name=".AnimationBtnActivity"></activity>
     </application>
 
 </manifest>

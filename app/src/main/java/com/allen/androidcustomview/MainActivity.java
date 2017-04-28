@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button_wave_sin_cos;
     private Button button_radar;
     private Button button_tag;
+    private Button animation_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         button_wave_sin_cos = (Button) findViewById(R.id.wave_view_by_sin_cos_btn);
         button_radar = (Button) findViewById(R.id.radar_view_btn);
         button_tag = (Button) findViewById(R.id.tag_view_btn);
+        animation_btn = (Button) findViewById(R.id.animation_btn);
 
         button_bubble.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, TagActivity.class));
+            }
+        });
+        animation_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AnimationBtnActivity.class));
             }
         });
 
