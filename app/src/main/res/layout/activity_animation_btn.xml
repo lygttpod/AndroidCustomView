@@ -7,7 +7,7 @@
 
     <com.allen.androidcustomview.widget.AnimationButton
         android:id="@+id/animation_btn"
-        android:layout_width="300dp"
-        android:layout_height="45dp" />
+        android:layout_width="200dp"
+        android:layout_height="50dp" />
 
 </LinearLayout>

@@ -16,6 +16,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 /**
  * Created by allen on 2017/4/26.
@@ -55,7 +56,7 @@ public class AnimationButton extends View {
     /**
      * 动画执行时间
      */
-    private int duration = 1000;
+    private int duration = 2000;
     /**
      * view向上移动距离
      */
@@ -189,6 +190,9 @@ public class AnimationButton extends View {
 
         animatorSet.play(animator_move_to_up).before(animator_draw_ok).after(animator_rect_to_square).after(animator_rect_to_angle);
 
+//        animatorSet.play(animator_rect_to_square).before(animator_draw_ok).after(animator_rect_to_angle);
+
+//        animatorSet.play(animator_draw_ok);
     }
 
 
@@ -236,6 +240,7 @@ public class AnimationButton extends View {
         final float curTranslationY = this.getTranslationY();
         animator_move_to_up = ObjectAnimator.ofFloat(this, "translationY", curTranslationY, curTranslationY - move_distance);
         animator_move_to_up.setDuration(duration);
+        animator_move_to_up.setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
     /**
@@ -266,7 +271,7 @@ public class AnimationButton extends View {
         paint.setColor(bg_color);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setTextSize(50);
+        textPaint.setTextSize(40);
         textPaint.setColor(Color.WHITE);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setAntiAlias(true);
@@ -286,6 +291,7 @@ public class AnimationButton extends View {
         height = h;
 
         default_two_circle_distance = (w - h) / 2;
+
         initOk();
         initAnimation();
 
@@ -342,11 +348,10 @@ public class AnimationButton extends View {
      * 绘制对勾
      */
     private void initOk() {
-
         //对勾的路径
-        path.moveTo(width / 2 - 40, height / 2 - 15);
-        path.lineTo(width / 2 - 10, height / 2 + 20);
-        path.lineTo(width / 2 + 40, height / 2 - 40);
+        path.moveTo(default_two_circle_distance + height / 8 * 3, height / 2);
+        path.lineTo(default_two_circle_distance + height / 2, height / 5 * 3);
+        path.lineTo(default_two_circle_distance + height / 3 * 2, height / 5 * 2);
 
         pathMeasure = new PathMeasure(path, true);
 
