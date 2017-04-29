@@ -24,7 +24,7 @@ public class AnimationBtnActivity extends AppCompatActivity {
             @Override
             public void animationFinish() {
                 Toast.makeText(AnimationBtnActivity.this,"动画执行完毕",Toast.LENGTH_SHORT).show();
-                finish();
+//                finish();
             }
         });
     }

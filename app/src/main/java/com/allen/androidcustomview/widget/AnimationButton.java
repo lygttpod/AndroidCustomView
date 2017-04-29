@@ -56,7 +56,7 @@ public class AnimationButton extends View {
     /**
      * 动画执行时间
      */
-    private int duration = 2000;
+    private int duration = 1000;
     /**
      * view向上移动距离
      */
@@ -184,15 +184,16 @@ public class AnimationButton extends View {
      */
     private void initAnimation() {
         set_rect_to_angle_animation();
-        set_rect_to_square_animation();
+        set_rect_to_circle_animation();
         set_move_to_up_animation();
         set_draw_ok_animation();
 
-        animatorSet.play(animator_move_to_up).before(animator_draw_ok).after(animator_rect_to_square).after(animator_rect_to_angle);
+        animatorSet
+                .play(animator_move_to_up)
+                .before(animator_draw_ok)
+                .after(animator_rect_to_square)
+                .after(animator_rect_to_angle);
 
-//        animatorSet.play(animator_rect_to_square).before(animator_draw_ok).after(animator_rect_to_angle);
-
-//        animatorSet.play(animator_draw_ok);
     }
 
 
@@ -213,9 +214,9 @@ public class AnimationButton extends View {
 
 
     /**
-     * 设置矩形过度到正方形的动画
+     * 设置圆角矩形过度到圆的动画
      */
-    private void set_rect_to_square_animation() {
+    private void set_rect_to_circle_animation() {
         animator_rect_to_square = ValueAnimator.ofInt(0, default_two_circle_distance);
         animator_rect_to_square.setDuration(duration);
         animator_rect_to_square.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
