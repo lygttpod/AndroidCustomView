@@ -177,7 +177,7 @@
 
 最终奉上我们自己一步一步完整实现的效果图
 
-![button.gif](http://upload-images.jianshu.io/upload_images/2057501-9cf1fee5464b6a6b.gif?imageMogr2/auto-orient/strip)
+![button_animation.gif](http://upload-images.jianshu.io/upload_images/2057501-0d1119721429bf71.gif?imageMogr2/auto-orient/strip)
 
 ## 总结：看到这里是不是觉得这样的动画实现起来也不是很复杂嘛，也许你会觉得这样的动画没什么技术含量，实现起来真的没什么难度，何必再此大做文章呐，其实我这里也只是个抛砖引玉的作用，提供一种学习方法，也许今天我们遇到的只是一个简单的动画，可明天如果需要我们去做更复杂的动画呐，我们该怎么处理，怎么分析，怎么实现呐。只要我们把自己的需求分析拆解，把复杂的步骤简单化，分布实现在组合到一起就可以实现自己想要的效果（你要知道炫酷的电影特效也是一帧一帧动画合成的哦）。
 
