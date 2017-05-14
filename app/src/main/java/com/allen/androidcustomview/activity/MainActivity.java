@@ -1,14 +1,13 @@
-package com.allen.androidcustomview;
+package com.allen.androidcustomview.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.tagview.TagActivity;
-import com.allen.androidcustomview.widget.PayPsdInputView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,9 +18,11 @@ public class MainActivity extends AppCompatActivity {
     private Button button_radar;
     private Button button_tag;
     private Button animation_btn;
+    private Button pay_psd_view_btn;
+    private Button progress_btn;
 
 
-    private PayPsdInputView passwordInputView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,23 +34,8 @@ public class MainActivity extends AppCompatActivity {
         button_radar = (Button) findViewById(R.id.radar_view_btn);
         button_tag = (Button) findViewById(R.id.tag_view_btn);
         animation_btn = (Button) findViewById(R.id.animation_btn);
-
-        passwordInputView = (PayPsdInputView) findViewById(R.id.password);
-
-        passwordInputView.setComparePassword("123456", new PayPsdInputView.onPasswordListener() {
-            @Override
-            public void onDifference() {
-                // TODO: 2017/5/7   和上次输入的密码不一致  做相应的业务逻辑处理
-                Toast.makeText(MainActivity.this,"两次密码输入不同",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onEqual(String psd) {
-                // TODO: 2017/5/7 两次输入密码相同，那就去进行支付楼
-                Toast.makeText(MainActivity.this,"密码相同"+psd,Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        pay_psd_view_btn = (Button) findViewById(R.id.pay_psd_view_btn);
+        progress_btn = (Button) findViewById(R.id.progress_btn);
 
         button_bubble.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +71,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, AnimationBtnActivity.class));
+            }
+        });
+
+        pay_psd_view_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, PayPsdViewActivity.class));
+            }
+        });
+        progress_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ProgressBarActivity.class));
             }
         });
 

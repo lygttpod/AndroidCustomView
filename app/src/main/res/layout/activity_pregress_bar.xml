@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.allen.androidcustomview.activity.ProgressBarActivity">
+
+    <com.allen.androidcustomview.widget.CircleProgressBarView
+        android:id="@+id/circle_progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/progress_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp" />
+
+    <com.allen.androidcustomview.widget.HorizontalProgressBar
+        android:id="@+id/horizontal_progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>

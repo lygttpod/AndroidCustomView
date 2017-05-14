@@ -8,19 +8,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoTitle">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BubbleViewActivity" />
-        <activity android:name=".WaveByBezierActivity" />
-        <activity android:name=".WaveBySinCosActivity" />
-        <activity android:name=".RadarActivity" />
+        <activity android:name=".activity.BubbleViewActivity" />
+        <activity android:name=".activity.WaveByBezierActivity" />
+        <activity android:name=".activity.WaveBySinCosActivity" />
+        <activity android:name=".activity.RadarActivity" />
         <activity android:name=".tagview.TagActivity" />
-        <activity android:name=".AnimationBtnActivity"></activity>
+        <activity android:name=".activity.AnimationBtnActivity" />
+        <activity android:name=".activity.ProgressBarActivity" />
+        <activity android:name=".activity.PayPsdViewActivity"></activity>
     </application>
 
 </manifest>

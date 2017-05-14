@@ -1,7 +1,9 @@
-package com.allen.androidcustomview;
+package com.allen.androidcustomview.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.allen.androidcustomview.R;
 
 public class WaveBySinCosActivity extends AppCompatActivity {
 

@@ -1,9 +1,10 @@
-package com.allen.androidcustomview;
+package com.allen.androidcustomview.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.widget.AnimationButton;
 
 public class AnimationBtnActivity extends AppCompatActivity {

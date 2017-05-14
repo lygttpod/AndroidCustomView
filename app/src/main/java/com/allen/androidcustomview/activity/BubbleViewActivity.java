@@ -1,4 +1,4 @@
-package com.allen.androidcustomview;
+package com.allen.androidcustomview.activity;
 
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.bean.CircleBean;
 import com.allen.androidcustomview.utils.DisplayUtils;
 import com.allen.androidcustomview.widget.BubbleView;

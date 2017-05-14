@@ -1,10 +1,11 @@
-package com.allen.androidcustomview;
+package com.allen.androidcustomview.activity;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.widget.WaveAnimatorView;
 import com.allen.androidcustomview.widget.WaveViewByBezier;
 

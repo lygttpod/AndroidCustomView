@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:psd="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -41,27 +40,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="按钮自定义动画" />
-
-
-    <com.allen.androidcustomview.widget.PayPsdInputView
-        android:id="@+id/password"
+    <Button
+        android:id="@+id/pay_psd_view_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
-        android:inputType="number"
-        psd:maxCount="6"
-        psd:psdType="weChat"
-        psd:rectAngle="0dp" />
+        android:text="自定义支付密码输入框" />
 
-    <com.allen.androidcustomview.widget.PayPsdInputView
+    <Button
+        android:id="@+id/progress_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
-        android:inputType="number"
-        psd:maxCount="6"
-        psd:psdType="bottomLine" />
+        android:text="自定义进度条" />
+
 
 
 </LinearLayout>
