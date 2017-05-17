@@ -35,7 +35,7 @@ public class ProgressBarActivity extends AppCompatActivity {
         });
         circleProgressBarView.startProgressAnimation();
 
-        horizontalProgressBar.setProgress(70).setProgressListener(new HorizontalProgressBar.ProgressListener() {
+        horizontalProgressBar.setProgress(98).setProgressListener(new HorizontalProgressBar.ProgressListener() {
             @Override
             public void currentProgressListener(float currentProgress) {
             }

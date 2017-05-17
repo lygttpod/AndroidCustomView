@@ -20,7 +20,12 @@
         android:textSize="20sp" />
 
     <com.allen.androidcustomview.widget.HorizontalProgressBar
+        android:layout_marginTop="20dp"
         android:id="@+id/horizontal_progress_view"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="@string/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

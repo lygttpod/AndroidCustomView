@@ -134,7 +134,7 @@ public class CircleProgressBarView extends View {
                 currentProgress = value * 360 / 100;
 
                 if (progressListener != null) {
-                    progressListener.currentProgressListener(value);
+                    progressListener.currentProgressListener(roundTwo(value));
                 }
                 invalidate();
 
@@ -197,5 +197,12 @@ public class CircleProgressBarView extends View {
         progressListener = listener;
         return this;
     }
-
+    /**
+     * 将一个小数四舍五入，保留两位小数返回
+     * @param originNum
+     * @return
+     */
+    public static float roundTwo(float originNum) {
+        return (float) (Math.round(originNum * 10) / 10.0);
+    }
 }

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.allen.androidcustomview">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +23,7 @@
         <activity android:name=".tagview.TagActivity" />
         <activity android:name=".activity.AnimationBtnActivity" />
         <activity android:name=".activity.ProgressBarActivity" />
-        <activity android:name=".activity.PayPsdViewActivity"></activity>
+        <activity android:name=".activity.PayPsdViewActivity"/>
     </application>
 
 </manifest>
