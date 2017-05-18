@@ -25,7 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
-        android:text="@string/app_name"
+        android:id="@+id/startAnimationBtn"
+        android:layout_marginTop="20dp"
+        android:text="启动动画"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

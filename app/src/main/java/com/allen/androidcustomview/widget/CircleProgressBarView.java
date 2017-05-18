@@ -54,8 +54,14 @@ public class CircleProgressBarView extends View {
      */
     private Paint progressPaint;
 
-    private int circleBgColor = Color.GRAY;
-    private int progressColor = Color.RED;
+    /**
+     * 进度条背景颜色
+     */
+    private int circleBgColor = 0xFFe1e5e8;
+    /**
+     * 进度条颜色
+     */
+    private int progressColor = 0xFFf66b12;
 
     /**
      * 默认圆环的宽度
@@ -84,7 +90,7 @@ public class CircleProgressBarView extends View {
     /**
      * 动画执行时间
      */
-    private int duration = 2000;
+    private int duration = 1000;
     /**
      * 动画延时启动时间
      */

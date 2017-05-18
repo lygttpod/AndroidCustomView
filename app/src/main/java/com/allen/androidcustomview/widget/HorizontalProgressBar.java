@@ -2,8 +2,6 @@ package com.allen.androidcustomview.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,13 +11,10 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.ViewUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-
-import com.allen.androidcustomview.R;
 
 import java.text.DecimalFormat;
 
@@ -31,15 +26,15 @@ import java.text.DecimalFormat;
 
 public class HorizontalProgressBar extends View {
 
-
     private Paint bgPaint;
     private Paint progressPaint;
 
     private Paint tipPaint;
     private Paint textPaint;
 
-    private int width;
-    private int height;
+    private int mWidth;
+    private int mHeight;
+    private int mViewHeight;
     /**
      * 进度
      */
@@ -64,157 +59,225 @@ public class HorizontalProgressBar extends View {
      */
     private int startDelay = 500;
 
+    /**
+     * 进度条画笔的宽度
+     */
+    private int progressPaintWidth ;
 
-    private ProgressListener progressListener;
+    /**
+     * 百分比提示框画笔的宽度
+     */
+    private int tipPaintWidth ;
 
+    /**
+     * 百分比提示框的高度
+     */
+    private int tipHeight;
 
+    /**
+     * 百分比提示框的宽度
+     */
+    private int tipWidth;
+
+    /**
+     * 画三角形的path
+     */
     private Path path = new Path();
+    /**
+     * 三角形的高
+     */
+    private int triangleHeight;
+    /**
+     * 进度条距离提示框的高度
+     */
+    private int progressMarginTop;
 
-    private int strokeWidth = 5;
-
-    private int tipHeight = 50;
-    private int tipWidth = 100;
-
-    private int dis = 10;
-
-
-    private float move;
+    /**
+     * 进度移动的距离
+     */
+    private float moveDis;
 
     private Rect textRect = new Rect();
     private String textString;
+    /**
+     * 百分比文字字体大小
+     */
+    private int textPaintSize;
 
+    /**
+     * 进度条背景颜色
+     */
     private int bgColor = 0xFFe1e5e8;
-
+    /**
+     * 进度条颜色
+     */
     private int progressColor = 0xFFf66b12;
 
+    /**
+     * 绘制提示框的矩形
+     */
     private RectF rectF = new RectF();
+
+    /**
+     * 圆角矩形的圆角半径
+     */
+    private int roundRectRadius;
+
+    /**
+     * 进度监听回调
+     */
+    private ProgressListener progressListener;
+
     public HorizontalProgressBar(Context context) {
         super(context);
     }
 
     public HorizontalProgressBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
+        initPaint();
+    }
 
-        bgPaint = getPaint(strokeWidth, bgColor);
-        progressPaint = getPaint(strokeWidth, progressColor);
+    /**
+     * 初始化画笔宽度及view大小
+     */
+    private void init() {
+        progressPaintWidth = dp2px(4);
+        tipHeight = dp2px(15);
+        tipWidth = dp2px(30);
+        tipPaintWidth = dp2px(1);
+        triangleHeight = dp2px(3);
+        roundRectRadius = dp2px(2);
+        textPaintSize = sp2px(10);
+        progressMarginTop = dp2px(8);
 
-        tipPaint = getPaint(1, progressColor);
-        tipPaint.setStyle(Paint.Style.FILL);
+        //view真实的高度
+        mViewHeight = tipHeight+tipPaintWidth+triangleHeight+progressPaintWidth+progressMarginTop;
+    }
 
+    /**
+     * 初始化画笔
+     */
+    private void initPaint() {
+        bgPaint = getPaint(progressPaintWidth, bgColor, Paint.Style.STROKE);
+        progressPaint = getPaint(progressPaintWidth, progressColor, Paint.Style.STROKE);
+        tipPaint = getPaint(tipPaintWidth, progressColor, Paint.Style.FILL);
+
+        initTextPaint();
+    }
+
+    /**
+     * 初始化文字画笔
+     */
+    private void initTextPaint() {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setTextSize(20);
+        textPaint.setTextSize(textPaintSize);
         textPaint.setColor(Color.WHITE);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setAntiAlias(true);
     }
 
-    private Paint getPaint(int strokeWidth, int color) {
+    /**
+     * 统一处理paint
+     * @param strokeWidth
+     * @param color
+     * @param style
+     * @return
+     */
+    private Paint getPaint(int strokeWidth, int color, Paint.Style style) {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(strokeWidth);
         paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStyle(Paint.Style.STROKE);
-
+        paint.setStyle(style);
         return paint;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+
+        setMeasuredDimension(measureWidth(widthMode,width),measureHeight(heightMode,height));
     }
 
-    private int measureWidth(int measureSpec) {
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
-        //设置一个默认值，就是这个View的默认宽度为500，这个看我们自定义View的要求
-        int result = 300;
-        if (specMode == MeasureSpec.AT_MOST) {//相当于我们设置为wrap_content
-            result = specSize;
-        } else if (specMode == MeasureSpec.EXACTLY) {//相当于我们设置为match_parent或者为一个具体的值
-            result = specSize;
+    /**
+     * 测量宽度
+     * @param mode
+     * @param width
+     * @return
+     */
+    private int measureWidth(int mode, int width) {
+        switch (mode){
+            case MeasureSpec.UNSPECIFIED:
+            case MeasureSpec.AT_MOST:
+                break;
+            case MeasureSpec.EXACTLY:
+                mWidth = width;
+                break;
         }
-        return result;
+        return mWidth;
     }
-
-    private int measureHeight(int measureSpec) {
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
-        int result = 100;
-        if (specMode == MeasureSpec.AT_MOST) {
-            result = specSize;
-        } else if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
+    /**
+     * 测量高度
+     * @param mode
+     * @param height
+     * @return
+     */
+    private int measureHeight(int mode, int height) {
+        switch (mode){
+            case MeasureSpec.UNSPECIFIED:
+            case MeasureSpec.AT_MOST:
+                mHeight = mViewHeight;
+                break;
+            case MeasureSpec.EXACTLY:
+                mHeight = height;
+                break;
         }
-        return result;
-    }
-
-
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-
-        width = w;
-        height = h;
-
+        return mHeight;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-//        canvas.drawLine(getPaddingLeft(), getHeight()-strokeWidth , getWidth(), getHeight()-strokeWidth , bgPaint);
-//
-//        canvas.drawLine(getPaddingLeft(), getHeight()-strokeWidth , currentProgress, getHeight()-strokeWidth , progressPaint);
-
-        canvas.drawLine(getPaddingLeft(), tipHeight +20 , getWidth(), tipHeight +20 , bgPaint);
-
-        canvas.drawLine(getPaddingLeft(), tipHeight +20 , currentProgress, tipHeight +20 , progressPaint);
-
-//        drawTipPath(canvas,move);
+        canvas.drawLine(getPaddingLeft(), tipHeight +progressMarginTop , getWidth(), tipHeight +progressMarginTop , bgPaint);
+        canvas.drawLine(getPaddingLeft(), tipHeight +progressMarginTop , currentProgress, tipHeight +progressMarginTop , progressPaint);
         drawTipView(canvas);
-
         drawText(canvas,textString);
 
     }
 
-    private void drawTipPath(Canvas canvas, int move) {
-        path.moveTo(0+move,0);
-        path.lineTo(0+move, tipHeight);
-        path.lineTo((tipWidth -dis)/2+move, tipHeight);
-        path.lineTo((tipWidth -dis)/2+dis/2+move, tipHeight +5);
-        path.lineTo((tipWidth -dis)/2+dis+move, tipHeight);
-        path.lineTo(tipWidth +move, tipHeight);
-        path.lineTo(tipWidth +move,0);
-        path.close();
-
-        drawTipView(canvas);
-
-
-        path.reset();
-    }
-
+    /**
+     * 绘制进度上边提示百分比的view
+     * @param canvas
+     */
     private void drawTipView(Canvas canvas) {
         drawRoundRect(canvas);
-
         drawTriangle(canvas);
     }
 
 
+    /**
+     * 绘制圆角矩形
+     * @param canvas
+     */
     private void drawRoundRect(Canvas canvas) {
-
-        rectF.set(move,0, tipWidth +move, tipHeight);
-        canvas.drawRoundRect(rectF,5,5,tipPaint);
-        canvas.drawPath(path,tipPaint);
-
+        rectF.set(moveDis,0, tipWidth + moveDis, tipHeight);
+        canvas.drawRoundRect(rectF,roundRectRadius,roundRectRadius,tipPaint);
     }
 
+    /**
+     * 绘制三角形
+     * @param canvas
+     */
     private void drawTriangle(Canvas canvas) {
-        path.moveTo(tipWidth /2-dis+move, tipHeight);
-        path.lineTo(tipWidth /2+move, tipHeight +dis);
-        path.lineTo(tipWidth /2+dis+move, tipHeight);
+        path.moveTo(tipWidth /2- triangleHeight + moveDis, tipHeight);
+        path.lineTo(tipWidth /2+ moveDis, tipHeight + triangleHeight);
+        path.lineTo(tipWidth /2+ triangleHeight + moveDis, tipHeight);
         canvas.drawPath(path,tipPaint);
         path.reset();
 
@@ -226,9 +289,9 @@ public class HorizontalProgressBar extends View {
      * @param canvas 画布
      */
     private void drawText(Canvas canvas, String textString) {
-        textRect.left = (int) move;
+        textRect.left = (int) moveDis;
         textRect.top = 0;
-        textRect.right = (int) (tipWidth +move);
+        textRect.right = (int) (tipWidth + moveDis);
         textRect.bottom = tipHeight;
         Paint.FontMetricsInt fontMetrics = textPaint.getFontMetricsInt();
         int baseline = (textRect.bottom + textRect.top - fontMetrics.bottom - fontMetrics.top) / 2;
@@ -236,6 +299,9 @@ public class HorizontalProgressBar extends View {
         canvas.drawText(textString+"%", textRect.centerX(), baseline, textPaint);
     }
 
+    /**
+     * 进度移动动画  通过插值的方式改变移动的距离
+     */
     private void initAnimation() {
         progressAnimator = ValueAnimator.ofFloat(0, mProgress);
         progressAnimator.setDuration(duration);
@@ -245,16 +311,16 @@ public class HorizontalProgressBar extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float value = (float) valueAnimator.getAnimatedValue();
-                textString = formatNum(value);
-                currentProgress = value * width / 100;
+                textString = formatNum(format2Int(value));
+                currentProgress = value * mWidth / 100;
                 if (progressListener != null) {
                     progressListener.currentProgressListener(value);
                 }
-                if (currentProgress>=(tipWidth /2)&&currentProgress<=(width- tipWidth /2)){
-                    move = currentProgress- tipWidth /2;
+                //移动百分比提示框，只有当前进度到提示框中间位置之后开始移动，当进度框移动到最右边的时候停止移动，但是进度条还可以继续移动
+                if (currentProgress>=(tipWidth /2)&&currentProgress<=(mWidth - tipWidth /2)){
+                    moveDis = currentProgress- tipWidth /2;
                 }
                 invalidate();
-
             }
         });
         progressAnimator.start();
@@ -267,32 +333,61 @@ public class HorizontalProgressBar extends View {
         return this;
     }
 
+    /**
+     * 开启动画
+     */
     public void startProgressAnimation() {
+        if (progressAnimator!=null &&
+                !progressAnimator.isRunning()&&
+                !progressAnimator.isStarted())
         progressAnimator.start();
     }
 
+    /**
+     * 暂停动画
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void pauseProgressAnimation() {
-        progressAnimator.pause();
+        if (progressAnimator!=null){
+            progressAnimator.pause();
+        }
     }
 
+    /**
+     * 恢复动画
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void resumeProgressAnimation() {
+        if (progressAnimator!=null)
         progressAnimator.resume();
     }
 
+    /**
+     * 停止动画
+     */
     public void stopProgressAnimation() {
-        progressAnimator.end();
+        if (progressAnimator!=null){
+            progressAnimator.end();
+        }
     }
 
+    /**
+     * 回调接口
+     */
     public interface ProgressListener {
         void currentProgressListener(float currentProgress);
     }
 
+    /**
+     * 回调监听事件
+     * @param listener
+     * @return
+     */
     public HorizontalProgressBar setProgressListener(ProgressListener listener) {
         progressListener = listener;
         return this;
     }
+
     /**
      * 格式化数字(保留两位小数)
      * @param money
@@ -304,11 +399,11 @@ public class HorizontalProgressBar extends View {
     }
 
     /**
-     * 格式化数字(保留两位小数)
+     * 格式化数字(保留一位小数)
      * @param money
      * @return
      */
-    public static String formatNum(float money) {
+    public static String formatNum(int money) {
         DecimalFormat format = new DecimalFormat("0");
         return format.format(money);
     }
@@ -336,5 +431,7 @@ public class HorizontalProgressBar extends View {
                 spVal, getResources().getDisplayMetrics());
 
     }
-
+    public static int format2Int(double i){
+        return Math.abs((int) (i-0.005));
+    }
 }
