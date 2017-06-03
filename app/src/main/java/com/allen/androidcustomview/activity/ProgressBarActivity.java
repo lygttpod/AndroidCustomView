@@ -50,7 +50,7 @@ public class ProgressBarActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                horizontalProgressBar.setProgress(60);
+                horizontalProgressBar.setProgress(100);
                 circleProgressBarView.setProgress(60).startProgressAnimation();
                 circleProgressBarView.setProgressListener(new CircleProgressBarView.ProgressListener() {
                     @Override

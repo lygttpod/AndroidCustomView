@@ -20,14 +20,15 @@
         android:textSize="20sp" />
 
     <com.allen.androidcustomview.widget.HorizontalProgressBar
-        android:layout_marginTop="20dp"
         android:id="@+id/horizontal_progress_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp" />
+
     <Button
         android:id="@+id/startAnimationBtn"
-        android:layout_marginTop="20dp"
-        android:text="启动动画"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="启动动画" />
 </LinearLayout>
