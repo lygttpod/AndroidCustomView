@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.tagview.TagActivity;
+import com.allen.androidcustomview.widget.FadeInTextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button pay_psd_view_btn;
     private Button progress_btn;
 
+    private Button animationViewBtn;
 
 
     @Override
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         animation_btn = (Button) findViewById(R.id.animation_btn);
         pay_psd_view_btn = (Button) findViewById(R.id.pay_psd_view_btn);
         progress_btn = (Button) findViewById(R.id.progress_btn);
+        animationViewBtn = (Button) findViewById(R.id.animation_view_btn);
 
         button_bubble.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ProgressBarActivity.class));
             }
         });
+        animationViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AnimationViewActivity.class));
+            }
+        });
+
 
     }
 

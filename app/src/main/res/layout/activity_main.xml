@@ -40,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="按钮自定义动画" />
+
     <Button
         android:id="@+id/pay_psd_view_btn"
         android:layout_width="match_parent"
@@ -52,7 +53,11 @@
         android:layout_height="wrap_content"
         android:text="自定义进度条" />
 
-
+    <Button
+        android:id="@+id/animation_view_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="使用的带动画的view" />
 
 </LinearLayout>
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <com.allen.androidcustomview.widget.FadeInTextView
+        android:id="@+id/fade_in_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="20dp" />
+
+    <com.allen.androidcustomview.widget.LoadingButton
+        android:id="@+id/loading_btn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="100dp"
+        android:background="#f66b12"
+        android:text="登陆"
+        android:textColor="@android:color/white" />
+</LinearLayout>
