@@ -1,6 +1,6 @@
 
 # [**炫酷的提交按钮**](https://github.com/lygttpod/AndroidCustomView/blob/master/animation_button.md)
-![99.gif](http://upload-images.jianshu.io/upload_images/2057501-d710bca1e166fbc4.gif?imageMogr2/auto-orient/strip)
+![99.gif](http://upload-images.jianshu.io/upload_images/2057501-0d1119721429bf71.gif?imageMogr2/auto-orient/strip)
 
 
 # [**仿微信支付宝等风格的支付密码输入框的实现**](https://github.com/lygttpod/AndroidCustomView/blob/master/pay_psd_input_view.md)
