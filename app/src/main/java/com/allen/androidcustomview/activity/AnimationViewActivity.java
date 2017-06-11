@@ -22,12 +22,14 @@ public class AnimationViewActivity extends AppCompatActivity {
         fadeInTextView = (FadeInTextView) findViewById(R.id.fade_in_tv);
         loadingButton = (LoadingButton) findViewById(R.id.loading_btn);
 
-        fadeInTextView.setTextString("自定义view实现字符串逐字显示").startFadeInAnimation().setTextAnimationListener(new FadeInTextView.TextAnimationListener() {
-            @Override
-            public void animationFinish() {
-                loadingButton.stopLoading();
-            }
-        });
+        fadeInTextView
+                .setTextString("自定义view实现字符串逐字显示")
+                .setTextAnimationListener(new FadeInTextView.TextAnimationListener() {
+                    @Override
+                    public void animationFinish() {
+                        loadingButton.stopLoading();
+                    }
+                });
 
         loadingButton.setOnClickListener(new View.OnClickListener() {
             @Override

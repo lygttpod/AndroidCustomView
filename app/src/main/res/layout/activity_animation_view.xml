@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:maxLines="10"
         android:textColor="@color/colorAccent"
         android:textSize="20dp" />
 
@@ -19,6 +20,6 @@
         android:layout_height="45dp"
         android:layout_marginTop="100dp"
         android:background="#f66b12"
-        android:text="登陆"
+        android:text="启动"
         android:textColor="@android:color/white" />
 </LinearLayout>

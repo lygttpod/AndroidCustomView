@@ -8,3 +8,6 @@
 
 # [**炫酷的进度条**](https://github.com/lygttpod/AndroidCustomView/blob/master/progress.md)
 ![progress.gif](http://upload-images.jianshu.io/upload_images/2057501-615ad5fe97faf782.gif?imageMogr2/auto-orient/strip)
+
+# [**TextView实现打印机逐个显示的效果**](http://www.jianshu.com/p/4d987769785c)
+![FadeInTextView.gif](http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip)
