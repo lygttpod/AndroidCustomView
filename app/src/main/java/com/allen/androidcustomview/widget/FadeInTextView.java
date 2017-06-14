@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
@@ -15,10 +14,18 @@ import android.widget.TextView;
  * Created by allen on 2017/6/5.
  * <p>
  * 字符串逐字显示的view
+ *   fadeInTextView
+ *               .setTextString("自己的字符串")
+ *               .startFadeInAnimation()
+ *               .setTextAnimationListener(new FadeInTextView.TextAnimationListener() {
+ *                   @Override
+ *                   public void animationFinish() {
+ *
+ *                   }
+ *               });
  */
 
 public class FadeInTextView extends TextView {
-
 
     private Rect textRect = new Rect();
 
@@ -56,9 +63,10 @@ public class FadeInTextView extends TextView {
     @Override
     protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
-        if (stringBuffer != null) {
-            drawText(canvas, stringBuffer.toString());
-        }
+//        使用setText代替重绘就不用自己去绘制text了
+//        if (stringBuffer != null) {
+//            drawText(canvas, stringBuffer.toString());
+//        }
     }
 
     /**
@@ -103,7 +111,15 @@ public class FadeInTextView extends TextView {
                         }
                     }
 
-                    invalidate();
+                    //新思路的做法
+                    setText(stringBuffer.toString());
+
+                    /**
+                     * 之前的做法刷新重绘text,需要自己控制文字的绘制，
+                     * 看到网友的评论开拓了思路，既然是直接集成TextView
+                     * 就可以直接使用setText()方法进行设置值了
+                     */
+                    //invalidate();老思路的做法
                 }
             }
         });

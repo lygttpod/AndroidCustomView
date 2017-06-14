@@ -23,7 +23,7 @@ public class AnimationViewActivity extends AppCompatActivity {
         loadingButton = (LoadingButton) findViewById(R.id.loading_btn);
 
         fadeInTextView
-                .setTextString("自定义view实现字符串逐字显示")
+                .setTextString("自定义view实现字符串逐字显示，后边的文字是为了测试换行是否正常显示！")
                 .setTextAnimationListener(new FadeInTextView.TextAnimationListener() {
                     @Override
                     public void animationFinish() {
