@@ -6,14 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by allen on 2016/12/13.
@@ -39,18 +36,8 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
     /**
      * 一个周期波浪的长度
      */
-    private int mWaveLength = 1000;
+    private int mWaveLength;
 
-
-    /**
-     * 屏幕宽度内波浪显示几个周期
-     */
-    private int mWaveCount;
-
-    /**
-     * 波纹的中间轴（基准线）
-     */
-    private int mCenterY;
     /**
      * 波浪的路径
      */
@@ -64,33 +51,33 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
     /**
      * 振幅
      */
-    private int mWaveAmplitude = 25;
+    private int mWaveAmplitude = 50;
 
     private ValueAnimator valueAnimator;
 
 
-    private boolean isStart = true;
+    private boolean isStart = false;
 
     public WaveViewByBezier(Context context) {
-        super(context);
+        this(context, null);
 
     }
 
     public WaveViewByBezier(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
 
     }
 
     public WaveViewByBezier(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
 
     private void init() {
+        mWaveAmplitude = dp2px(15);
         initPaint();
-
-        initAnimation();
+        setOnClickListener(this);
 
     }
 
@@ -108,27 +95,61 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
 
     }
 
-
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        mScreenHeight = h;
-        mScreenWidth = w;
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
 
-//        mWaveCount = (int) Math.round(mScreenWidth / mWaveLength + 1.5);
-        mWaveCount = 1;
-        Log.d(TAG, "onSizeChanged: =======" + mWaveCount);
-        mCenterY = mScreenHeight * 3 / 4;
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
 
-        setOnClickListener(this);
-
+        setMeasuredDimension(measureWidth(widthMode, width), measureHeight(heightMode, height));
     }
+
+    /**
+     * 测量宽度
+     *
+     * @param mode
+     * @param width
+     * @return
+     */
+    private int measureWidth(int mode, int width) {
+        switch (mode) {
+            case MeasureSpec.UNSPECIFIED:
+            case MeasureSpec.AT_MOST:
+                break;
+            case MeasureSpec.EXACTLY:
+                mScreenWidth = width;
+                break;
+        }
+        return mScreenWidth;
+    }
+
+    /**
+     * 测量高度
+     *
+     * @param mode
+     * @param height
+     * @return
+     */
+    private int measureHeight(int mode, int height) {
+        switch (mode) {
+            case MeasureSpec.UNSPECIFIED:
+            case MeasureSpec.AT_MOST:
+                break;
+            case MeasureSpec.EXACTLY:
+                mScreenHeight = height;
+                break;
+        }
+        return mScreenHeight;
+    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mWaveLength = getWidth();
+        mWaveLength = mScreenWidth;
         mWavePath.reset();
 
 //        mWavePath.moveTo(-mWaveLength + mOffset, mCenterY);
@@ -141,21 +162,36 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
 //        mWavePath.lineTo(0, mScreenHeight);
 //        mWavePath.close();
 
-        mWavePath.moveTo(mOffset, mCenterY);
+        mWavePath.moveTo(-mWaveLength + mOffset, mWaveAmplitude);
 
-        for (int i = 0; i < mWaveCount; i++) {
-            mWavePath.quadTo(mWaveLength /4+ mOffset, mCenterY + 60, mWaveLength / 2 + mOffset, mCenterY);
-            mWavePath.quadTo(mWaveLength *3/ 4 + mOffset, mCenterY - 60,  + mOffset, mCenterY);
-        }
-        mWavePath.lineTo(mScreenWidth, mScreenHeight);
-        mWavePath.lineTo(0, mScreenHeight);
+        mWavePath.quadTo(-mWaveLength * 3 / 4 + mOffset, -mWaveAmplitude, -mWaveLength / 2 + mOffset, mWaveAmplitude);
+
+        mWavePath.quadTo(-mWaveLength / 4 + mOffset, 3 * mWaveAmplitude, 0 + mOffset, mWaveAmplitude);
+
+        mWavePath.quadTo(mWaveLength / 4 + mOffset, -mWaveAmplitude, mWaveLength / 2 + mOffset, mWaveAmplitude);
+
+        mWavePath.quadTo(mWaveLength * 3 / 4 + mOffset, 3 * mWaveAmplitude, mWaveLength + mOffset, mWaveAmplitude);
+
+        mWavePath.lineTo(getWidth(), getHeight());
+        mWavePath.lineTo(0, getHeight());
         mWavePath.close();
+
+
+//        mWavePath.moveTo(mOffset, mCenterY);
+//
+//        for (int i = 0; i < mWaveCount; i++) {
+//            mWavePath.quadTo(mWaveLength /4+ mOffset, mCenterY + 60, mWaveLength / 2 + mOffset, mCenterY);
+//            mWavePath.quadTo(mWaveLength *3/ 4 + mOffset, mCenterY - 60,  + mOffset, mCenterY);
+//        }
+//        mWavePath.lineTo(mScreenWidth, mScreenHeight);
+//        mWavePath.lineTo(0, mScreenHeight);
+//        mWavePath.close();
         canvas.drawPath(mWavePath, mWavePaint);
     }
 
 
     private void initAnimation() {
-        valueAnimator = ValueAnimator.ofInt(0, getWidth());
+        valueAnimator = ValueAnimator.ofInt(0, mScreenWidth);
         valueAnimator.setDuration(3000);
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setInterpolator(new LinearInterpolator());
@@ -166,14 +202,13 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
                 postInvalidate();
             }
         });
-        valueAnimator.start();
     }
 
     public void startAnimation() {
         isStart = true;
         if (valueAnimator != null) {
 
-            valueAnimator.reverse();
+            valueAnimator.start();
         }
     }
 
@@ -184,6 +219,7 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
             this.clearAnimation();
         }
     }
+
     public void pauseAnimation() {
         isStart = false;
         if (valueAnimator != null) {
@@ -195,17 +231,33 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
         isStart = true;
         if (valueAnimator != null) {
             valueAnimator.resume();
-            onAnimationStart();
         }
     }
 
 
     @Override
     public void onClick(View v) {
-        if (isStart){
-            pauseAnimation();
-        }else {
-            resumeAnimation();
+        initAnimation();
+        if (valueAnimator != null) {
+            if (isStart) {
+                isStart = false;
+                valueAnimator.pause();
+            } else {
+                isStart = true;
+                valueAnimator.start();
+            }
         }
+
+    }
+
+
+    /**
+     * dp 2 px
+     *
+     * @param dpVal
+     */
+    protected int dp2px(int dpVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, getResources().getDisplayMetrics());
     }
 }
