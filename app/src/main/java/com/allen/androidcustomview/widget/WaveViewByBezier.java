@@ -3,7 +3,6 @@ package com.allen.androidcustomview.widget;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -11,14 +10,13 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-
 /**
  * Created by allen on 2016/12/13.
  * <p>
  * 波浪动画
  */
 
-public class WaveViewByBezier extends View implements View.OnClickListener {
+public class WaveViewByBezier extends View {
 
     /**
      * 屏幕高度
@@ -49,14 +47,28 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
     private int mOffset;
 
     /**
+     * 一个屏幕内显示几个周期
+     */
+    private int mWaveCount;
+
+    /**
      * 振幅
      */
-    private int mWaveAmplitude = 50;
+    private int mWaveAmplitude;
+
+    /**
+     * 波形的颜色
+     */
+    private int waveColor = 0xaaFF7E37;
+
+    private static final int SIN = 0;
+    private static final int COS = 1;
+    private static final int DEFAULT = SIN;
+
+    private int waveType = DEFAULT;
 
     private ValueAnimator valueAnimator;
 
-
-    private boolean isStart = false;
 
     public WaveViewByBezier(Context context) {
         this(context, null);
@@ -64,21 +76,15 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
     }
 
     public WaveViewByBezier(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-
-    }
-
-    public WaveViewByBezier(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(context, attrs);
         init();
     }
 
 
     private void init() {
-        mWaveAmplitude = dp2px(15);
+        mWaveAmplitude = dp2px(10);
+        mWaveLength = dp2px(500);
         initPaint();
-        setOnClickListener(this);
-
     }
 
 
@@ -89,59 +95,24 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
         mWavePath = new Path();
 
         mWavePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mWavePaint.setColor(Color.GRAY);
+        mWavePaint.setColor(waveColor);
         mWavePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mWavePaint.setAntiAlias(true);
 
     }
 
+
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int width = MeasureSpec.getSize(widthMeasureSpec);
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
 
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int height = MeasureSpec.getSize(heightMeasureSpec);
+        mScreenHeight = h;
+        mScreenWidth = w;
 
-        setMeasuredDimension(measureWidth(widthMode, width), measureHeight(heightMode, height));
-    }
-
-    /**
-     * 测量宽度
-     *
-     * @param mode
-     * @param width
-     * @return
-     */
-    private int measureWidth(int mode, int width) {
-        switch (mode) {
-            case MeasureSpec.UNSPECIFIED:
-            case MeasureSpec.AT_MOST:
-                break;
-            case MeasureSpec.EXACTLY:
-                mScreenWidth = width;
-                break;
-        }
-        return mScreenWidth;
-    }
-
-    /**
-     * 测量高度
-     *
-     * @param mode
-     * @param height
-     * @return
-     */
-    private int measureHeight(int mode, int height) {
-        switch (mode) {
-            case MeasureSpec.UNSPECIFIED:
-            case MeasureSpec.AT_MOST:
-                break;
-            case MeasureSpec.EXACTLY:
-                mScreenHeight = height;
-                break;
-        }
-        return mScreenHeight;
+        /**
+         * 加上1.5是为了保证至少有两个波形（屏幕外边一个完整的波形，屏幕里边一个完整的波形）
+         */
+        mWaveCount = (int) Math.round(mScreenWidth / mWaveLength + 1.5);
     }
 
 
@@ -149,107 +120,124 @@ public class WaveViewByBezier extends View implements View.OnClickListener {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mWaveLength = mScreenWidth;
-        mWavePath.reset();
+        switch (waveType) {
+            case SIN:
+                drawSinPath(canvas);
+                break;
+            case COS:
+                drawCosPath(canvas);
+                break;
+        }
 
-//        mWavePath.moveTo(-mWaveLength + mOffset, mCenterY);
-//
-//        for (int i = 0; i < mWaveCount; i++) {
-//            mWavePath.quadTo(-mWaveLength * 3 / 4 + i * mWaveLength + mOffset, mCenterY + 60, -mWaveLength / 2 + i * mWaveLength + mOffset, mCenterY);
-//            mWavePath.quadTo(-mWaveLength / 4 + i * mWaveLength + mOffset, mCenterY - 60, i * mWaveLength + mOffset, mCenterY);
-//        }
-//        mWavePath.lineTo(mScreenWidth, mScreenHeight);
-//        mWavePath.lineTo(0, mScreenHeight);
-//        mWavePath.close();
+    }
+
+    /**
+     * sin函数图像的波形
+     *
+     * @param canvas
+     */
+    private void drawSinPath(Canvas canvas) {
+        mWavePath.reset();
 
         mWavePath.moveTo(-mWaveLength + mOffset, mWaveAmplitude);
 
-        mWavePath.quadTo(-mWaveLength * 3 / 4 + mOffset, -mWaveAmplitude, -mWaveLength / 2 + mOffset, mWaveAmplitude);
+        // TODO: 2017/6/19   //相信很多人会疑惑为什么控制点的纵坐标是以下值,是根据公式计算出来的,具体计算方法情况文章内容
 
-        mWavePath.quadTo(-mWaveLength / 4 + mOffset, 3 * mWaveAmplitude, 0 + mOffset, mWaveAmplitude);
+        for (int i = 0; i < mWaveCount; i++) {
 
-        mWavePath.quadTo(mWaveLength / 4 + mOffset, -mWaveAmplitude, mWaveLength / 2 + mOffset, mWaveAmplitude);
+            //第一个控制点的坐标为(-mWaveLength * 3 / 4,-mWaveAmplitude)
+            mWavePath.quadTo(-mWaveLength * 3 / 4 + mOffset + i * mWaveLength,
+                    -mWaveAmplitude,
+                    -mWaveLength / 2 + mOffset + i * mWaveLength,
+                    mWaveAmplitude);
 
-        mWavePath.quadTo(mWaveLength * 3 / 4 + mOffset, 3 * mWaveAmplitude, mWaveLength + mOffset, mWaveAmplitude);
+            //第二个控制点的坐标为(-mWaveLength / 4,3 * mWaveAmplitude)
+            mWavePath.quadTo(-mWaveLength / 4 + mOffset + i * mWaveLength,
+                    3 * mWaveAmplitude,
+                    mOffset + i * mWaveLength,
+                    mWaveAmplitude);
+        }
 
         mWavePath.lineTo(getWidth(), getHeight());
         mWavePath.lineTo(0, getHeight());
         mWavePath.close();
 
+        canvas.drawPath(mWavePath, mWavePaint);
+    }
 
-//        mWavePath.moveTo(mOffset, mCenterY);
-//
-//        for (int i = 0; i < mWaveCount; i++) {
-//            mWavePath.quadTo(mWaveLength /4+ mOffset, mCenterY + 60, mWaveLength / 2 + mOffset, mCenterY);
-//            mWavePath.quadTo(mWaveLength *3/ 4 + mOffset, mCenterY - 60,  + mOffset, mCenterY);
-//        }
-//        mWavePath.lineTo(mScreenWidth, mScreenHeight);
-//        mWavePath.lineTo(0, mScreenHeight);
-//        mWavePath.close();
+    /**
+     * cos函数图像的波形
+     *
+     * @param canvas
+     */
+    private void drawCosPath(Canvas canvas) {
+        mWavePath.reset();
+
+        mWavePath.moveTo(-mWaveLength + mOffset, mWaveAmplitude);
+
+        for (int i = 0; i < mWaveCount; i++) {
+
+            //第一个控制点的坐标为(-mWaveLength * 3 / 4,3 * mWaveAmplitude
+            mWavePath.quadTo(-mWaveLength * 3 / 4 + mOffset + i * mWaveLength,
+                    3 * mWaveAmplitude,
+                    -mWaveLength / 2 + mOffset + i * mWaveLength,
+                    mWaveAmplitude);
+
+            //第二个控制点的坐标为(-mWaveLength / 4,-mWaveAmplitude)
+            mWavePath.quadTo(-mWaveLength / 4 + mOffset + i * mWaveLength,
+                    -mWaveAmplitude,
+                    mOffset + i * mWaveLength,
+                    mWaveAmplitude);
+        }
+
+        mWavePath.lineTo(getWidth(), getHeight());
+        mWavePath.lineTo(0, getHeight());
+        mWavePath.close();
+
         canvas.drawPath(mWavePath, mWavePaint);
     }
 
 
+    /**
+     * 波形动画
+     */
     private void initAnimation() {
-        valueAnimator = ValueAnimator.ofInt(0, mScreenWidth);
-        valueAnimator.setDuration(3000);
+        valueAnimator = ValueAnimator.ofInt(0, mWaveLength);
+        valueAnimator.setDuration(2000);
+        valueAnimator.setStartDelay(300);
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mOffset = (int) animation.getAnimatedValue();
-                postInvalidate();
+                invalidate();
             }
         });
+        valueAnimator.start();
     }
 
     public void startAnimation() {
-        isStart = true;
-        if (valueAnimator != null) {
-
-            valueAnimator.start();
-        }
+        initAnimation();
     }
 
     public void stopAnimation() {
-        isStart = false;
         if (valueAnimator != null) {
             valueAnimator.cancel();
-            this.clearAnimation();
         }
     }
 
     public void pauseAnimation() {
-        isStart = false;
         if (valueAnimator != null) {
             valueAnimator.pause();
         }
     }
 
     public void resumeAnimation() {
-        isStart = true;
         if (valueAnimator != null) {
             valueAnimator.resume();
         }
     }
-
-
-    @Override
-    public void onClick(View v) {
-        initAnimation();
-        if (valueAnimator != null) {
-            if (isStart) {
-                isStart = false;
-                valueAnimator.pause();
-            } else {
-                isStart = true;
-                valueAnimator.start();
-            }
-        }
-
-    }
-
 
     /**
      * dp 2 px

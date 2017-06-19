@@ -9,12 +9,14 @@ import com.allen.androidcustomview.widget.WaveViewByBezier;
 public class WaveByBezierActivity extends AppCompatActivity {
 
     private WaveViewByBezier waveViewByBezier;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wave_by_bezier);
 
         waveViewByBezier = (WaveViewByBezier) findViewById(R.id.wave_bezier);
+        waveViewByBezier.startAnimation();
     }
 
     @Override
@@ -26,12 +28,9 @@ public class WaveByBezierActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        waveViewByBezier.resumeAnimation();
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
 
     @Override
     protected void onDestroy() {

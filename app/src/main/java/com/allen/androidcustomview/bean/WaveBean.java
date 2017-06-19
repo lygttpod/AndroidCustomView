@@ -9,31 +9,13 @@ public class WaveBean {
 
     private int waveLength;
 
-    private int offset;
-    private int startOffset;
+    private int waveAmplitude;
 
-    private int waveRepeatCount;
+    private int waveColor;
 
-    public WaveBean(int waveLength, int startOffset) {
-        this.waveLength = waveLength;
-        this.startOffset = startOffset;
-    }
+    private int waveType;
 
-    public int getStartOffset() {
-        return startOffset;
-    }
-
-    public void setStartOffset(int startOffset) {
-        this.startOffset = startOffset;
-    }
-
-    public int getWaveRepeatCount() {
-        return waveRepeatCount;
-    }
-
-    public void setWaveRepeatCount(int waveRepeatCount) {
-        this.waveRepeatCount = waveRepeatCount;
-    }
+    private int duration;
 
     public int getWaveLength() {
         return waveLength;
@@ -43,11 +25,35 @@ public class WaveBean {
         this.waveLength = waveLength;
     }
 
-    public int getOffset() {
-        return offset;
+    public int getWaveAmplitude() {
+        return waveAmplitude;
     }
 
-    public void setOffset(int offset) {
-        this.offset = offset;
+    public void setWaveAmplitude(int waveAmplitude) {
+        this.waveAmplitude = waveAmplitude;
+    }
+
+    public int getWaveColor() {
+        return waveColor;
+    }
+
+    public void setWaveColor(int waveColor) {
+        this.waveColor = waveColor;
+    }
+
+    public int getWaveType() {
+        return waveType;
+    }
+
+    public void setWaveType(int waveType) {
+        this.waveType = waveType;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }
