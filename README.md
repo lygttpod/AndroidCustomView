@@ -12,5 +12,5 @@
 # [**TextView实现打印机逐个显示的效果**](http://www.jianshu.com/p/4d987769785c)
 ![FadeInTextView.gif](http://upload-images.jianshu.io/upload_images/2057501-a7a751b456b25494.gif?imageMogr2/auto-orient/strip)
 
-# [**T水波动画效果多种实现方式详解**](http://www.jianshu.com/p/0cd1c1d47f4a)
+# [**水波动画效果多种实现方式详解**](http://www.jianshu.com/p/0cd1c1d47f4a)
 ![wave.gif](http://upload-images.jianshu.io/upload_images/2057501-43358432099e1e71.gif?imageMogr2/auto-orient/strip)
