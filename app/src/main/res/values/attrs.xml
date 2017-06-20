@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="WaveAnimatorView">
 
-        <attr name="waveStartColor" format="color" />
-        <attr name="waveEndColor" format="color" />
-        <attr name="waveLength" format="dimension" />
-        <attr name="waveDuration" format="integer" />
-        <attr name="waveAmplitude" format="dimension" />
-        <attr name="waveStartOffset" format="dimension" />
-
-        <attr name="waveFillTop" format="boolean" />
-        <attr name="waveFillBottom" format="boolean" />
-
-        <attr name="waveType" format="enum">
-            <enum name="sin" value="0" />
-            <enum name="cos" value="1" />
-            <enum name="sin_and_cos" value="2" />
-        </attr>
-    </declare-styleable>
     <declare-styleable name="PayPsdInputView">
 
         <attr name="maxCount" format="integer" />
@@ -33,5 +16,29 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="WaveView">
 
+        <attr name="waveColor" format="color" />
+
+        <attr name="waveAmplitude" format="dimension" />
+
+        <attr name="waveSpeed" format="float" />
+
+        <attr name="waveStartPeriod" format="float" />
+        <attr name="waveStart" format="boolean" />
+
+        <attr name="waveFillTop" format="boolean" />
+        <attr name="waveFillBottom" format="boolean" />
+
+        <attr name="waveFillType" format="enum">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+        </attr>
+
+        <attr name="waveType" format="enum">
+            <enum name="sin" value="0" />
+            <enum name="cos" value="1" />
+        </attr>
+
+    </declare-styleable>
 </resources>

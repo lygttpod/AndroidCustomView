@@ -3,13 +3,19 @@
     android:id="@+id/activity_wave_by_bezier"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="100dp">
+    android:orientation="vertical">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="贝塞尔曲线实现的水波效果" />
 
     <com.allen.androidcustomview.widget.WaveViewByBezier
         android:id="@+id/wave_bezier"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="100dp" />
 
 </LinearLayout>

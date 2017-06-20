@@ -28,12 +28,10 @@ public class BubbleViewActivity extends AppCompatActivity {
 
     private List<CircleBean> circleBeanList = new ArrayList<>();
 
-    private WaveViewByBezier waveView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bubble_view);
-        waveView = (WaveViewByBezier) findViewById(R.id.wave);
         hxbIv = (ImageView) findViewById(R.id.hxb_iv);
         hxbTv = (TextView) findViewById(R.id.center_tv);
         bezierView = (BubbleView) findViewById(R.id.circle_view);
@@ -149,13 +147,11 @@ public class BubbleViewActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: ");
-        waveView.startAnimation();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause: ");
-        waveView.stopAnimation();
     }
 }

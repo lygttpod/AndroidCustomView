@@ -1,12 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wave="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_wave_by_sin_cos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.allen.androidcustomview.widget.WaveViewBySinCos
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            wave:waveAmplitude="10dp"
+            wave:waveFillType="top"
+            wave:waveSpeed="3"
+            wave:waveStart="true"
+            wave:waveStartPeriod="1"
+            wave:waveType="sin" />
+
+        <com.allen.androidcustomview.widget.WaveViewBySinCos
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            wave:waveAmplitude="10dp"
+            wave:waveFillType="top"
+            wave:waveSpeed="3"
+            wave:waveStart="true"
+            wave:waveStartPeriod="0.5"
+            wave:waveType="sin" />
+
+    </FrameLayout>
+
 
     <com.allen.androidcustomview.widget.WaveViewBySinCos
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="80dp"
+        android:layout_marginTop="80dp"
+        wave:waveAmplitude="10dp"
+        wave:waveColor="#cccccccc"
+        wave:waveFillType="bottom"
+        wave:waveSpeed="3"
+        wave:waveStart="true"
+        wave:waveStartPeriod="1"
+        wave:waveType="sin" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp">
+
+        <com.allen.androidcustomview.widget.WaveViewBySinCos
+            android:id="@+id/wave_sin"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            wave:waveAmplitude="15dp"
+            wave:waveColor="@color/colorAccent"
+            wave:waveFillType="bottom"
+            wave:waveSpeed="3"
+            wave:waveStart="true"
+            wave:waveStartPeriod="1"
+            wave:waveType="sin" />
+
+        <com.allen.androidcustomview.widget.WaveViewBySinCos
+            android:id="@+id/wave_sin2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            wave:waveAmplitude="15dp"
+            wave:waveColor="@color/colorAccent"
+            wave:waveFillType="bottom"
+            wave:waveSpeed="3"
+            wave:waveStart="true"
+            wave:waveStartPeriod="0"
+            wave:waveType="sin" />
+
+    </FrameLayout>
+
+
 </LinearLayout>
