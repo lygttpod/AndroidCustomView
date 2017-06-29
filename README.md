@@ -1,3 +1,4 @@
+![demo下载](https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/res/mipmap-xxhdpi/app_download.png?raw=true)
 
 # [**炫酷的提交按钮**](https://github.com/lygttpod/AndroidCustomView/blob/master/animation_button.md)
 ![99.gif](http://upload-images.jianshu.io/upload_images/2057501-0d1119721429bf71.gif?imageMogr2/auto-orient/strip)
