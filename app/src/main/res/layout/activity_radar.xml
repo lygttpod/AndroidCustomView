@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/beijing2x">
 
-    <com.allen.androidcustomview.widget.WaveView
+    <com.allen.androidcustomview.widget.RadarWaveView
         android:id="@+id/radar_view"
         android:layout_gravity="center"
         android:layout_width="wrap_content"

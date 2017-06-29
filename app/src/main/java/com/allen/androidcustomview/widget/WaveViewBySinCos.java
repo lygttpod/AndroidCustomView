@@ -93,15 +93,15 @@ public class WaveViewBySinCos extends View {
     }
 
     private void getAttr(AttributeSet attrs) {
-        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.WaveView);
+        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.RadarWaveView);
 
-        waveType = typedArray.getInt(R.styleable.WaveView_waveType, SIN);
-        waveFillType = typedArray.getInt(R.styleable.WaveView_waveFillType, BOTTOM);
-        A = typedArray.getDimensionPixelOffset(R.styleable.WaveView_waveAmplitude, dp2px(10));
-        waveColor = typedArray.getColor(R.styleable.WaveView_waveColor, waveColor);
-        waveSpeed = typedArray.getFloat(R.styleable.WaveView_waveSpeed, waveSpeed);
-        startPeriod = typedArray.getFloat(R.styleable.WaveView_waveStartPeriod, 0);
-        waveStart = typedArray.getBoolean(R.styleable.WaveView_waveStart, false);
+        waveType = typedArray.getInt(R.styleable.RadarWaveView_waveType, SIN);
+        waveFillType = typedArray.getInt(R.styleable.RadarWaveView_waveFillType, BOTTOM);
+        A = typedArray.getDimensionPixelOffset(R.styleable.RadarWaveView_waveAmplitude, dp2px(10));
+        waveColor = typedArray.getColor(R.styleable.RadarWaveView_waveColor, waveColor);
+        waveSpeed = typedArray.getFloat(R.styleable.RadarWaveView_waveSpeed, waveSpeed);
+        startPeriod = typedArray.getFloat(R.styleable.RadarWaveView_waveStartPeriod, 0);
+        waveStart = typedArray.getBoolean(R.styleable.RadarWaveView_waveStart, false);
 
         typedArray.recycle();
     }

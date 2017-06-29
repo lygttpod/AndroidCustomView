@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cpbv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,13 @@
         android:id="@+id/circle_progress_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        cpbv:centerProgressTextColor="@color/colorAccent"
+        cpbv:centerProgressTextSize="20sp"
+        cpbv:circleBgStrokeWidth="10dp"
+        cpbv:isDrawCenterProgressText="true"
+        cpbv:progressStrokeWidth="10dp" />
+
 
     <TextView
         android:id="@+id/progress_tv"

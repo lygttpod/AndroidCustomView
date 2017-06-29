@@ -20,7 +20,7 @@ import android.view.animation.DecelerateInterpolator;
  * 雷达水波扩散动画
  */
 
-public class WaveView extends View {
+public class RadarWaveView extends View {
 
     /**
      * 圆形背景画笔
@@ -85,15 +85,15 @@ public class WaveView extends View {
     private AnimatorSet mAnimatorSet;
 
 
-    public WaveView(Context context) {
+    public RadarWaveView(Context context) {
         this(context, null);
     }
 
-    public WaveView(Context context, @Nullable AttributeSet attrs) {
+    public RadarWaveView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WaveView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RadarWaveView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         initBgPaint();

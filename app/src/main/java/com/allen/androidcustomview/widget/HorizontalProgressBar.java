@@ -351,9 +351,29 @@ public class HorizontalProgressBar extends View {
     }
 
 
-    public HorizontalProgressBar setProgress(float progress) {
+    /**
+     * 设置进度条带动画效果
+     *
+     * @param progress
+     * @return
+     */
+    public HorizontalProgressBar setProgressWithAnimation(float progress) {
         mProgress = progress;
         initAnimation();
+        return this;
+    }
+
+    /**
+     * 实时显示进度
+     *
+     * @param progress
+     * @return
+     */
+    public HorizontalProgressBar setCurrentProgress(float progress) {
+        mProgress = progress;
+        currentProgress = progress * mWidth / 100;
+        textString = formatNum(format2Int(progress));
+        invalidate();
         return this;
     }
 

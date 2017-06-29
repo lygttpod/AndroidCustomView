@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.widget.CircleProgressBarView;
@@ -30,7 +29,7 @@ public class ProgressBarActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.progress_tv);
         button = (Button) findViewById(R.id.startAnimationBtn);
 
-        circleProgressBarView.setProgress(60);
+        circleProgressBarView.setProgressWithAnimation(60);
         circleProgressBarView.setProgressListener(new CircleProgressBarView.ProgressListener() {
             @Override
             public void currentProgressListener(float currentProgress) {
@@ -39,7 +38,7 @@ public class ProgressBarActivity extends AppCompatActivity {
         });
         circleProgressBarView.startProgressAnimation();
 
-        horizontalProgressBar.setProgress(60).setProgressListener(new HorizontalProgressBar.ProgressListener() {
+        horizontalProgressBar.setProgressWithAnimation(60).setProgressListener(new HorizontalProgressBar.ProgressListener() {
             @Override
             public void currentProgressListener(float currentProgress) {
             }
@@ -50,8 +49,8 @@ public class ProgressBarActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                horizontalProgressBar.setProgress(100);
-                circleProgressBarView.setProgress(60).startProgressAnimation();
+                horizontalProgressBar.setProgressWithAnimation(100);
+                circleProgressBarView.setProgressWithAnimation(60).startProgressAnimation();
                 circleProgressBarView.setProgressListener(new CircleProgressBarView.ProgressListener() {
                     @Override
                     public void currentProgressListener(float currentProgress) {

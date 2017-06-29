@@ -16,7 +16,24 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="WaveView">
+    <declare-styleable name="CircleProgressBarView">
+
+        <attr name="circleBgStrokeWidth" format="dimension" />
+        <attr name="progressStrokeWidth" format="dimension" />
+
+        <attr name="circleBgColor" format="color" />
+        <attr name="progressColor" format="color" />
+
+        <attr name="circleAnimationDuration" format="integer" />
+
+        <attr name="isDrawCenterProgressText" format="boolean" />
+
+        <attr name="centerProgressTextColor" format="color"/>
+        <attr name="centerProgressTextSize" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="RadarWaveView">
 
         <attr name="waveColor" format="color" />
 
