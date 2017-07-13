@@ -1,8 +1,6 @@
 package com.allen.androidcustomview.widget;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ValueAnimator;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -28,26 +26,26 @@ public class LoadingButton extends Button {
 
     private Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    private Paint circlePaint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Paint circlePaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Paint circlePaint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    private int circleColor = 0xffffff;
-    //    private int circleColor = 0xf66b12;
-    private int duration = 1000;
+
+    private static final int POINT_COLOR_1 = 0x4CFFFFFF;
+    private static final int POINT_COLOR_2 = 0x7FFFFFFF;
+    private static final int POINT_COLOR_3 = 0xFFFFFFFF;
+
+    private int duration = 300;
 
     private float centerX;
     private float centerY;
 
     private float radius;
 
-    private AnimatorSet animatorSet;
-    private ValueAnimator animator1;
-    private ValueAnimator animator2;
-    private ValueAnimator animator3;
-
 
     private boolean isLoading = false;
+
+    private int mLoadingIndex = 0;
+    private Runnable mRunnable;
+
 
     public LoadingButton(Context context) {
         this(context, null);
@@ -58,84 +56,18 @@ public class LoadingButton extends Button {
 
         initPaint();
 
-        animatorSet = new AnimatorSet();
-        circleAnimator1();
-        circleAnimator2();
-        circleAnimator3();
-
-        animatorSet.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                animatorSet.start();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        animatorSet.play(animator1).with(animator2).with(animator3);
-
     }
 
-    private void circleAnimator1() {
-        animator1 = ValueAnimator.ofInt(255, 76, 165);
-        animator1.setDuration(duration);
-        animator1.setRepeatCount(ValueAnimator.INFINITE);
-        animator1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                circlePaint1.setAlpha((Integer) animation.getAnimatedValue());
-                invalidate();
-            }
-        });
-    }
-
-    private void circleAnimator2() {
-        animator2 = ValueAnimator.ofInt(165, 255, 76);
-        animator2.setDuration(duration);
-        animator2.setRepeatCount(ValueAnimator.INFINITE);
-        animator2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                circlePaint2.setAlpha((Integer) animation.getAnimatedValue());
-                invalidate();
-            }
-        });
-    }
-
-    private void circleAnimator3() {
-        animator3 = ValueAnimator.ofInt(76, 165, 255);
-        animator3.setDuration(duration);
-        animator3.setRepeatCount(ValueAnimator.INFINITE);
-        animator3.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                circlePaint3.setAlpha((Integer) animation.getAnimatedValue());
-                invalidate();
-            }
-        });
-    }
 
     private void initPaint() {
         initTextPaint();
-
-        circlePaint1 = getPaint(dp2px(1), circleColor, Paint.Style.FILL);
-        circlePaint1.setAlpha(255);
-        circlePaint2 = getPaint(dp2px(1), circleColor, Paint.Style.FILL);
-        circlePaint2.setAlpha(165);
-        circlePaint3 = getPaint(dp2px(1), circleColor, Paint.Style.FILL);
-        circlePaint3.setAlpha(76);
+        circlePaint = getPaint(dp2px(1), Paint.Style.FILL);
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+                invalidate();
+            }
+        };
     }
 
     /**
@@ -163,7 +95,7 @@ public class LoadingButton extends Button {
         centerY = mHeight / 2;
 
         radius = mHeight / 8;
-        Log.d("allen", "onMeasure: "+centerX);
+        Log.d("allen", "onMeasure: " + centerX);
     }
 
 
@@ -171,20 +103,48 @@ public class LoadingButton extends Button {
     protected void onDraw(Canvas canvas) {
 
         if (isLoading) {
-            drawLoading(canvas);
+            drawLoading(canvas, mLoadingIndex);
+            mLoadingIndex = (mLoadingIndex + 1) % 3;
+            postDelayed(mRunnable, duration);
+
         } else {
             super.onDraw(canvas);
         }
 
     }
 
-    private void drawLoading(Canvas canvas) {
-        canvas.drawCircle(centerX - radius * 4, centerY, radius, circlePaint1);
+    private void drawLoading(Canvas canvas, int index) {
+        if (index < 0 || index > 2)
+            return;
+        switch (index) {
+            case 0:
+                circlePaint.setColor(POINT_COLOR_1);
+                canvas.drawCircle(centerX - radius * 4, centerY, radius, circlePaint);
+                circlePaint.setColor(POINT_COLOR_2);
+                canvas.drawCircle(centerX, centerY, radius, circlePaint);
+                circlePaint.setColor(POINT_COLOR_3);
+                canvas.drawCircle(centerX + radius * 4, centerY, radius, circlePaint);
+                break;
+            case 1:
+                circlePaint.setColor(POINT_COLOR_3);
+                canvas.drawCircle(centerX - radius * 4, centerY, radius, circlePaint);
+                circlePaint.setColor(POINT_COLOR_1);
+                canvas.drawCircle(centerX, centerY, radius, circlePaint);
+                circlePaint.setColor(POINT_COLOR_2);
+                canvas.drawCircle(centerX + radius * 4, centerY, radius, circlePaint);
+                break;
+            case 2:
+                circlePaint.setColor(POINT_COLOR_2);
+                canvas.drawCircle(centerX - radius * 4, centerY, radius, circlePaint);
+                circlePaint.setColor(POINT_COLOR_3);
+                canvas.drawCircle(centerX, centerY, radius, circlePaint);
+                circlePaint.setColor(POINT_COLOR_1);
+                canvas.drawCircle(centerX + radius * 4, centerY, radius, circlePaint);
+                break;
+        }
 
-        canvas.drawCircle(centerX, centerY, radius, circlePaint2);
-
-        canvas.drawCircle(centerX + radius * 4, centerY, radius, circlePaint3);
     }
+
 
     /**
      * 绘制文字
@@ -201,32 +161,33 @@ public class LoadingButton extends Button {
 
 
     public void startLoading() {
-        if (animatorSet != null) {
-            isLoading = true;
-            animatorSet.start();
-        }
+        if (isLoading)
+            return;
+        isLoading = true;
+        mLoadingIndex = 0;
+        invalidate();
     }
 
     public void stopLoading() {
-        if (animatorSet != null) {
-            isLoading = false;
-            animatorSet.end();
-            postInvalidate();
-        }
+        if (!isLoading)
+            return;
+        isLoading = false;
+    }
+
+    public boolean isLoading() {
+        return isLoading;
     }
 
     /**
      * 统一处理paint
      *
      * @param strokeWidth
-     * @param color
      * @param style
      * @return
      */
-    public Paint getPaint(int strokeWidth, int color, Paint.Style style) {
+    public Paint getPaint(int strokeWidth, Paint.Style style) {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(strokeWidth);
-        paint.setColor(color);
         paint.setAntiAlias(true);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStyle(style);
