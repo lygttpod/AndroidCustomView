@@ -13,7 +13,6 @@ import android.widget.EditText;
 
 import com.allen.androidcustomview.R;
 
-
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
 /**
@@ -83,8 +82,9 @@ public class PayPsdInputView extends EditText {
      * 竖直分割线的颜色
      */
     private int divideLineColor = Color.GRAY;
+    private int focusedColor = Color.BLUE;
     private RectF rectF = new RectF();
-
+    private RectF focusedRecF = new RectF();
     private int psdType = 0;
     private final static int psdType_weChat = 0;
     private final static int psdType_bottomLine = 1;
@@ -110,6 +110,11 @@ public class PayPsdInputView extends EditText {
      * 需要对比的密码  一般为上次输入的
      */
     private String mComparePassword = null;
+
+    /**
+     * 当前输入的位置索引
+     */
+    private int position = 0;
 
     private onPasswordListener mListener;
 
@@ -137,6 +142,7 @@ public class PayPsdInputView extends EditText {
         divideLineColor = typedArray.getColor(R.styleable.PayPsdInputView_divideLineColor, divideLineColor);
         psdType = typedArray.getInt(R.styleable.PayPsdInputView_psdType, psdType);
         rectAngle = typedArray.getDimensionPixelOffset(R.styleable.PayPsdInputView_rectAngle, rectAngle);
+        focusedColor = typedArray.getColor(R.styleable.PayPsdInputView_focusedColor, focusedColor);
 
         typedArray.recycle();
     }
@@ -174,7 +180,6 @@ public class PayPsdInputView extends EditText {
         return paint;
     }
 
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -195,11 +200,12 @@ public class PayPsdInputView extends EditText {
     @Override
     protected void onDraw(Canvas canvas) {
         //不删除的画会默认绘制输入的文字
-//        super.onDraw(canvas);
+//       super.onDraw(canvas);
 
         switch (psdType) {
             case psdType_weChat:
                 drawWeChatBorder(canvas);
+                drawItemFocused(canvas, position);
                 break;
             case psdType_bottomLine:
                 drawBottomBorder(canvas);
@@ -208,7 +214,6 @@ public class PayPsdInputView extends EditText {
 
         drawPsdCircle(canvas);
     }
-
 
     /**
      * 画微信支付密码的样式
@@ -229,6 +234,14 @@ public class PayPsdInputView extends EditText {
 
     }
 
+    private void drawItemFocused(Canvas canvas, int position) {
+        if (position > maxCount - 1) {
+            return;
+        }
+        focusedRecF.set(position * divideLineWStartX, 0, (position + 1) * divideLineWStartX,
+                height);
+        canvas.drawRoundRect(focusedRecF, rectAngle, rectAngle, getPaint(3, Paint.Style.STROKE, focusedColor));
+    }
 
     /**
      * 画底部显示的分割线
@@ -263,6 +276,7 @@ public class PayPsdInputView extends EditText {
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
+        this.position = start + lengthAfter;
         textLength = text.toString().length();
 
         if (mComparePassword != null && textLength == maxCount) {
@@ -295,6 +309,11 @@ public class PayPsdInputView extends EditText {
         return getText().toString().trim();
     }
 
+    public void setComparePassword(String comparePassword, onPasswordListener listener) {
+        mComparePassword = comparePassword;
+        mListener = listener;
+    }
+
     /**
      * 密码比较监听
      */
@@ -302,10 +321,5 @@ public class PayPsdInputView extends EditText {
         void onDifference();
 
         void onEqual(String psd);
-    }
-
-    public void setComparePassword(String comparePassword, onPasswordListener listener) {
-        mComparePassword = comparePassword;
-        mListener = listener;
     }
 }

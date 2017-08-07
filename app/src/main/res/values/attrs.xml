@@ -10,6 +10,7 @@
         <attr name="divideLineWidth" format="dimension" />
         <attr name="divideLineColor" format="color" />
         <attr name="rectAngle" format="dimension" />
+        <attr name="focusedColor" format="color"/>
         <attr name="psdType" format="enum">
             <enum name="weChat" value="0" />
             <enum name="bottomLine" value="1" />

@@ -16,7 +16,7 @@
         android:inputType="number"
         psd:maxCount="6"
         psd:psdType="weChat"
-        psd:rectAngle="0dp" />
+        psd:rectAngle="4dp" />
 
     <com.allen.androidcustomview.widget.PayPsdInputView
         android:layout_width="match_parent"
