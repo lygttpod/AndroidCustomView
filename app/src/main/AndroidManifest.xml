@@ -24,7 +24,8 @@
         <activity android:name=".tagview.TagActivity" />
         <activity android:name=".activity.AnimationBtnActivity" />
         <activity android:name=".activity.ProgressBarActivity" />
-        <activity android:name=".activity.PayPsdViewActivity" />
+        <activity android:name=".activity.PayPsdViewActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
         <activity android:name=".activity.AnimationViewActivity"></activity>
     </application>
 
