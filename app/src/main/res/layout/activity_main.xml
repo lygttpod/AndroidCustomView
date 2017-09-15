@@ -59,5 +59,17 @@
         android:layout_height="wrap_content"
         android:text="使用的带动画的view" />
 
+    <Button
+        android:id="@+id/huawei_view_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="粘性小球" />
+
+    <Button
+        android:id="@+id/finger_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="指纹识别" />
+
 </LinearLayout>
 

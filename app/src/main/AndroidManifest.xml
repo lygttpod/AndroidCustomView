@@ -3,6 +3,8 @@
     package="com.allen.androidcustomview">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -24,9 +26,12 @@
         <activity android:name=".tagview.TagActivity" />
         <activity android:name=".activity.AnimationBtnActivity" />
         <activity android:name=".activity.ProgressBarActivity" />
-        <activity android:name=".activity.PayPsdViewActivity"
-            android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".activity.AnimationViewActivity"></activity>
+        <activity
+            android:name=".activity.PayPsdViewActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity android:name=".activity.AnimationViewActivity" />
+        <activity android:name=".activity.DragBallActivity" />
+        <activity android:name=".activity.FingerprintActivity" />
     </application>
 
 </manifest>

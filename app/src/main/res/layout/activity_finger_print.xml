@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/open_finger_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打开指纹验证" />
+
+    <Button
+        android:id="@+id/cancel_finger_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="取消指纹验证" />
+
+    <TextView
+        android:id="@+id/result_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

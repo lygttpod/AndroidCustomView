@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.tagview.TagActivity;
-import com.allen.androidcustomview.widget.FadeInTextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private Button progress_btn;
 
     private Button animationViewBtn;
+    private Button huaweiViewBtn;
+    private Button fingerBtn;
 
 
     @Override
@@ -41,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         pay_psd_view_btn = (Button) findViewById(R.id.pay_psd_view_btn);
         progress_btn = (Button) findViewById(R.id.progress_btn);
         animationViewBtn = (Button) findViewById(R.id.animation_view_btn);
+        huaweiViewBtn = (Button) findViewById(R.id.huawei_view_btn);
+        fingerBtn = (Button) findViewById(R.id.finger_btn);
 
         button_bubble.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +96,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, AnimationViewActivity.class));
+            }
+        });
+        huaweiViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DragBallActivity.class));
+            }
+        });
+        fingerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FingerprintActivity.class));
             }
         });
 
