@@ -34,10 +34,14 @@ public class DragBallView extends View {
     private int startX;
     private int startY;
 
+    //是否可拖拽
     private boolean mIsCanDrag = false;
+    //是否超过最大距离
     private boolean isOutOfRang = false;
+    //最终圆是否消失
     private boolean disappear = false;
 
+    //两圆相离最大距离
     private float maxDistance;
 
     //贝塞尔曲线需要的点
@@ -56,8 +60,8 @@ public class DragBallView extends View {
     //根据滑动位置动态改变圆的半径
     private float currentRadiusStart;
     private float currentRadiusEnd;
-    private Rect textRect = new Rect();
 
+    private Rect textRect = new Rect();
     //消息数
     private int msgCount = 0;
 
@@ -131,7 +135,6 @@ public class DragBallView extends View {
 
         currentRadiusEnd = radiusEnd;
         currentRadiusStart = radiusStart;
-        pointEnd.set(startX, startY);
     }
 
     @Override
@@ -141,12 +144,15 @@ public class DragBallView extends View {
         pointStart.set(startX, startY);
         if (isOutOfRang) {
             if (!disappear) {
-                drawEndBall(canvas);
+                drawEndBall(canvas, pointEnd, currentRadiusEnd);
             }
         } else {
             drawStartBall(canvas, pointStart, currentRadiusStart);
-            drawEndBall(canvas);
-            drawBezier(canvas);
+            if (mIsCanDrag) {
+                drawEndBall(canvas, pointEnd, currentRadiusEnd);
+                drawBezier(canvas);
+            }
+
         }
 
         if (!disappear) {
@@ -181,16 +187,17 @@ public class DragBallView extends View {
      */
     private void drawStartBall(Canvas canvas, PointF pointF, float radius) {
         canvas.drawCircle(pointF.x, pointF.y, radius, circlePaint);
-
     }
 
     /**
      * 画拖拽结束的小球
      *
      * @param canvas 画布
+     * @param pointF 点坐标
+     * @param radius 半径
      */
-    private void drawEndBall(Canvas canvas) {
-        canvas.drawCircle(pointEnd.x, pointEnd.y, currentRadiusEnd, circlePaint);
+    private void drawEndBall(Canvas canvas, PointF pointF, float radius) {
+        canvas.drawCircle(pointF.x, pointF.y, radius, circlePaint);
     }
 
     /**
@@ -291,6 +298,8 @@ public class DragBallView extends View {
             //比例系数  控制两圆半径缩放
             float percent = distance / maxDistance;
 
+            //之所以*0.6和0.2只为了放置拖拽过程圆变化的过大和过小这个系数是多次尝试的出的
+            //你也可以适当调整系数达到自己想要的效果
             currentRadiusStart = (1 - percent * 0.6f) * radiusStart;
             currentRadiusEnd = (1 + percent * 0.2f) * radiusEnd;
 
