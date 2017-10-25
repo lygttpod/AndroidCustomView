@@ -69,7 +69,8 @@
         android:id="@+id/finger_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="指纹识别" />
+        android:text="指纹识别"
+        android:visibility="gone" />
 
 </LinearLayout>
 

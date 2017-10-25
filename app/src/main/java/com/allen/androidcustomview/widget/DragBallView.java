@@ -157,7 +157,11 @@ public class DragBallView extends View {
 
         if (!disappear) {
             if (msgCount > 0) {
-                drawText(canvas, msgCount, pointEnd);
+                if (pointEnd.x==0||pointEnd.y==0){
+                    drawText(canvas, msgCount, pointStart);
+                }else {
+                    drawText(canvas, msgCount, pointEnd);
+                }
             }
         }
     }
