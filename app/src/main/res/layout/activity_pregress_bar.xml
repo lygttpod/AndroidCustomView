@@ -10,7 +10,7 @@
     <com.allen.androidcustomview.widget.CircleProgressBarView
         android:id="@+id/circle_progress_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
         cpbv:centerProgressTextColor="@color/colorAccent"
         cpbv:centerProgressTextSize="20sp"
@@ -32,10 +32,22 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp" />
 
+    <com.allen.androidcustomview.widget.ProductProgressBar
+        android:id="@+id/product_progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp" />
+
     <Button
         android:id="@+id/startAnimationBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="启动动画" />
+
+    <com.allen.androidcustomview.widget.LoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center" />
 </LinearLayout>

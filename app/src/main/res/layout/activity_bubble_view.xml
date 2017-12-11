@@ -35,7 +35,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="33dp"
         android:alpha="0"
-        android:text="红小宝"
+        android:text="欢迎你"
         android:textColor="@android:color/white"
         android:textSize="40sp" />
 
