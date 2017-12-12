@@ -15,10 +15,13 @@
 
 # [**水波动画效果多种实现方式详解**](http://www.jianshu.com/p/0cd1c1d47f4a)
 ![wave.gif](http://upload-images.jianshu.io/upload_images/2057501-43358432099e1e71.gif?imageMogr2/auto-orient/strip)
+
 # [**仿QQ未读消息拖拽效果详解**](http://www.jianshu.com/p/ed2721286778)
 ![拖拽粘性小球.gif](http://upload-images.jianshu.io/upload_images/2057501-7df462b80a11f7e2.gif?imageMogr2/auto-orient/strip)
 
+# [**炫酷的欢迎页**]
 ![欢迎页.gif](http://osnoex6vf.bkt.clouddn.com/welcome.gif)
 
+# [**进度条**]
 ![进度条.gif](http://osnoex6vf.bkt.clouddn.com/loading.gif)
 
