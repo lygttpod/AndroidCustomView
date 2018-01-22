@@ -311,6 +311,7 @@ public class AnimationButton extends View {
 
     }
 
+
     /**
      * 绘制长方形变成圆形
      *
@@ -363,6 +364,19 @@ public class AnimationButton extends View {
      */
     public void start() {
         animatorSet.start();
+    }
+
+    /**
+     * 动画还原
+     */
+    public void reset() {
+        startDrawOk = false;
+        circleAngle = 0;
+        two_circle_distance = 0;
+        default_two_circle_distance = (width - height) / 2;
+        textPaint.setAlpha(255);
+        setTranslationY(getTranslationY() + move_distance);
+        invalidate();
     }
 
     /**

@@ -111,6 +111,7 @@ public class PayPsdInputView extends EditText {
      */
     private String mComparePassword = null;
 
+
     /**
      * 当前输入的位置索引
      */
@@ -279,13 +280,20 @@ public class PayPsdInputView extends EditText {
         this.position = start + lengthAfter;
         textLength = text.toString().length();
 
-        if (mComparePassword != null && textLength == maxCount) {
-            if (TextUtils.equals(mComparePassword, getPasswordString())) {
-                mListener.onEqual(getPasswordString());
-            } else {
-                mListener.onDifference();
+        if (textLength == maxCount) {
+            if (mListener != null) {
+                if (TextUtils.isEmpty(mComparePassword)) {
+                    mListener.inputFinished(getPasswordString());
+                } else {
+                    if (TextUtils.equals(mComparePassword, getPasswordString())) {
+                        mListener.onEqual(getPasswordString());
+                    } else {
+                        mListener.onDifference(mComparePassword, getPasswordString());
+                    }
+                }
             }
         }
+
         invalidate();
 
     }
@@ -314,12 +322,29 @@ public class PayPsdInputView extends EditText {
         mListener = listener;
     }
 
+    public void setComparePassword(onPasswordListener listener) {
+        mListener = listener;
+    }
+
+    public void setComparePassword(String psd) {
+        mComparePassword = psd;
+    }
+
+    /**
+     * 清空密码
+     */
+    public void cleanPsd() {
+        setText("");
+    }
+
     /**
      * 密码比较监听
      */
     public interface onPasswordListener {
-        void onDifference();
+        void onDifference(String oldPsd, String newPsd);
 
         void onEqual(String psd);
+
+        void inputFinished(String inputPsd);
     }
 }
