@@ -39,6 +39,7 @@
         android:layout_margin="20dp" />
 
     <com.allen.androidcustomview.widget.LoadingLineView
+        android:id="@+id/loading_line_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp" />

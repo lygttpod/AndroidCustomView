@@ -78,6 +78,11 @@ public class LoadingLineView extends View {
      */
     private int startDelay = 0;
 
+    /**
+     * 是否停止动画（恢复初始状态）
+     */
+    private boolean isStopAnimation = false;
+
     public LoadingLineView(Context context) {
         this(context, null);
     }
@@ -198,14 +203,18 @@ public class LoadingLineView extends View {
          * 画底色
          */
         canvas.drawLine(0, centerY, mWidth, centerY, bgPaint);
-        /**
-         * loading向左扩散
-         */
-        canvas.drawLine(centerX, centerY, centerX - dis, centerY, loadingPaint);
-        /**
-         * loading向右扩散
-         */
-        canvas.drawLine(centerX, centerY, centerX + dis, centerY, loadingPaint);
+
+        if (!isStopAnimation) {
+            /**
+             * loading向左扩散
+             */
+            canvas.drawLine(centerX, centerY, centerX - dis, centerY, loadingPaint);
+            /**
+             * loading向右扩散
+             */
+            canvas.drawLine(centerX, centerY, centerX + dis, centerY, loadingPaint);
+        }
+
     }
 
     /**
@@ -240,6 +249,7 @@ public class LoadingLineView extends View {
         if (loadingAnimator != null) {
             loadingAnimator.start();
         }
+        isStopAnimation = false;
     }
 
     /**
@@ -249,6 +259,8 @@ public class LoadingLineView extends View {
         if (loadingAnimator != null) {
             loadingAnimator.cancel();
         }
+        isStopAnimation = true;
+        invalidate();
     }
 
 

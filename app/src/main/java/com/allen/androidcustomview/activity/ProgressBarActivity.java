@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.widget.CircleProgressBarView;
 import com.allen.androidcustomview.widget.HorizontalProgressBar;
+import com.allen.androidcustomview.widget.LoadingLineView;
 import com.allen.androidcustomview.widget.LoadingView;
 import com.allen.androidcustomview.widget.ProductProgressBar;
 
@@ -20,6 +21,7 @@ public class ProgressBarActivity extends AppCompatActivity {
     ProductProgressBar productProgressBar;
     LoadingView loadingView;
     TextView textView;
+    LoadingLineView loadingLineView;
 
     Button button;
 
@@ -33,6 +35,7 @@ public class ProgressBarActivity extends AppCompatActivity {
         horizontalProgressBar = (HorizontalProgressBar) findViewById(R.id.horizontal_progress_view);
         productProgressBar = (ProductProgressBar) findViewById(R.id.product_progress_view);
         loadingView = (LoadingView) findViewById(R.id.loading_view);
+        loadingLineView = (LoadingLineView) findViewById(R.id.loading_line_view);
 
         textView = (TextView) findViewById(R.id.progress_tv);
         button = (Button) findViewById(R.id.startAnimationBtn);
@@ -65,6 +68,7 @@ public class ProgressBarActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingLineView.stopLoading();
                 loadingView.startAnimation();
                 horizontalProgressBar.setProgressWithAnimation(100);
                 productProgressBar.setProgress(100);
