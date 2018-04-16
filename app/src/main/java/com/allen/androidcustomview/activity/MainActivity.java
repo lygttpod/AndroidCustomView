@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button animationViewBtn;
     private Button huaweiViewBtn;
     private Button fingerBtn;
+    private Button bannerBtn;
 
 
     @Override
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         animationViewBtn = (Button) findViewById(R.id.animation_view_btn);
         huaweiViewBtn = (Button) findViewById(R.id.huawei_view_btn);
         fingerBtn = (Button) findViewById(R.id.finger_btn);
+        bannerBtn = (Button) findViewById(R.id.banner_view_btn);
 
         button_bubble.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, FingerprintActivity.class));
+            }
+        });
+        bannerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BannerActivity.class));
             }
         });
 
