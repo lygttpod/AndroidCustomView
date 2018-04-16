@@ -33,6 +33,7 @@
         <activity android:name=".activity.DragBallActivity" />
         <activity android:name=".activity.FingerprintActivity" />
         <activity android:name=".activity.BannerActivity" />
+        <activity android:name=".activity.HoverItemActivity"/>
     </application>
 
 </manifest>

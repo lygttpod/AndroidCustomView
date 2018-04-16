@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/show_text_dialog"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:alpha="0.5"
+            android:background="#c0000000"
+            android:gravity="center"
+            android:textColor="#ffffffff"
+            android:textSize="50sp"
+            android:visibility="invisible" />
+
+
+    </FrameLayout>
+
+    <com.allen.androidcustomview.widget.IndexView
+        android:id="@+id/index_view"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right|center"
+
+        android:visibility="visible" />
+</RelativeLayout>
