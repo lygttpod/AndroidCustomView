@@ -152,6 +152,8 @@ public class HoverItemDecoration extends RecyclerView.ItemDecoration {
         //如果是分组第一个就留出绘制item的高度
         if (isFirstInGroup(position)) {
             outRect.top = itemHeight;
+        }else {
+            outRect.top = itemDivideHeight;
         }
 
     }
