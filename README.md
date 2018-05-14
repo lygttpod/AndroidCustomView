@@ -25,3 +25,5 @@
 # [**进度条**]
 ![进度条.gif](http://osnoex6vf.bkt.clouddn.com/loading.gif)
 
+# [**一行代码实现吸顶悬停效果**]
+![吸顶悬停.gif](http://osnoex6vf.bkt.clouddn.com/hover_view.gif)
