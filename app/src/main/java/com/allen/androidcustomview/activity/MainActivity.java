@@ -3,123 +3,99 @@ package com.allen.androidcustomview.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 
 import com.allen.androidcustomview.R;
+import com.allen.androidcustomview.adapter.MainAdapter;
+import com.allen.androidcustomview.bean.TypeBean;
 import com.allen.androidcustomview.tagview.TagActivity;
+import com.allen.androidcustomview.widget.DividerItemDecoration;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.OnItemClickListener {
 
-    private Button button_bubble;
-    private Button button_wave_bezier;
-    private Button button_wave_sin_cos;
-    private Button button_radar;
-    private Button button_tag;
-    private Button animation_btn;
-    private Button pay_psd_view_btn;
-    private Button progress_btn;
 
-    private Button animationViewBtn;
-    private Button huaweiViewBtn;
-    private Button fingerBtn;
-    private Button bannerBtn;
+    private RecyclerView recyclerView;
 
+    private MainAdapter adapter;
+
+    private List<TypeBean> typeBeans = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button_bubble = (Button) findViewById(R.id.bubble_view_btn);
-        button_wave_bezier = (Button) findViewById(R.id.wave_view_by_bezier_btn);
-        button_wave_sin_cos = (Button) findViewById(R.id.wave_view_by_sin_cos_btn);
-        button_radar = (Button) findViewById(R.id.radar_view_btn);
-        button_tag = (Button) findViewById(R.id.tag_view_btn);
-        animation_btn = (Button) findViewById(R.id.animation_btn);
-        pay_psd_view_btn = (Button) findViewById(R.id.pay_psd_view_btn);
-        progress_btn = (Button) findViewById(R.id.progress_btn);
-        animationViewBtn = (Button) findViewById(R.id.animation_view_btn);
-        huaweiViewBtn = (Button) findViewById(R.id.huawei_view_btn);
-        fingerBtn = (Button) findViewById(R.id.finger_btn);
-        bannerBtn = (Button) findViewById(R.id.banner_view_btn);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        button_bubble.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, BubbleViewActivity.class));
-            }
-        });
-        button_wave_bezier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, WaveByBezierActivity.class));
-            }
-        });
-        button_wave_sin_cos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, WaveBySinCosActivity.class));
-            }
-        });
-        button_radar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, RadarActivity.class));
-            }
-        });
-        button_tag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, TagActivity.class));
-            }
-        });
-        animation_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AnimationBtnActivity.class));
-            }
-        });
-
-        pay_psd_view_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, PayPsdViewActivity.class));
-            }
-        });
-        progress_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProgressBarActivity.class));
-            }
-        });
-        animationViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AnimationViewActivity.class));
-            }
-        });
-        huaweiViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DragBallActivity.class));
-            }
-        });
-        fingerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, FingerprintActivity.class));
-            }
-        });
-        bannerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HoverItemActivity.class));
-            }
-        });
-
-
+        adapter = new MainAdapter(getData());
+        adapter.setOnItemClickListener(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.setAdapter(adapter);
     }
 
+    private List<TypeBean> getData() {
+        typeBeans.add(new TypeBean("气泡漂浮动画", 0));
+        typeBeans.add(new TypeBean("波浪动画--贝塞尔曲线实现", 1));
+        typeBeans.add(new TypeBean("波浪动画--正余弦函数实现", 2));
+        typeBeans.add(new TypeBean("水波（雷达）扩散效果", 3));
+        typeBeans.add(new TypeBean("RecyclerView实现另类的Tag标签", 4));
+        typeBeans.add(new TypeBean("按钮自定义动画", 5));
+        typeBeans.add(new TypeBean("自定义支付密码输入框", 6));
+        typeBeans.add(new TypeBean("自定义进度条", 7));
+        typeBeans.add(new TypeBean("使用的带动画的view", 8));
+        typeBeans.add(new TypeBean("粘性小球", 9));
+        typeBeans.add(new TypeBean("banner", 10));
+        typeBeans.add(new TypeBean("吸顶效果--一行代码实现", 11));
+        return typeBeans;
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        switch (typeBeans.get(position).getType()) {
+            case 0:
+                startActivity(new Intent(MainActivity.this, BubbleViewActivity.class));
+                break;
+            case 1:
+                startActivity(new Intent(MainActivity.this, WaveByBezierActivity.class));
+                break;
+            case 2:
+                startActivity(new Intent(MainActivity.this, WaveBySinCosActivity.class));
+                break;
+            case 3:
+                startActivity(new Intent(MainActivity.this, RadarActivity.class));
+                break;
+            case 4:
+                startActivity(new Intent(MainActivity.this, TagActivity.class));
+                break;
+            case 5:
+                startActivity(new Intent(MainActivity.this, AnimationBtnActivity.class));
+                break;
+            case 6:
+                startActivity(new Intent(MainActivity.this, PayPsdViewActivity.class));
+                break;
+            case 7:
+                startActivity(new Intent(MainActivity.this, ProgressBarActivity.class));
+                break;
+            case 8:
+                startActivity(new Intent(MainActivity.this, AnimationViewActivity.class));
+                break;
+            case 9:
+                startActivity(new Intent(MainActivity.this, DragBallActivity.class));
+                break;
+            case 10:
+                startActivity(new Intent(MainActivity.this, BannerActivity.class));
+                break;
+            case 11:
+                startActivity(new Intent(MainActivity.this, HoverItemActivity.class));
+                break;
+        }
+    }
 }

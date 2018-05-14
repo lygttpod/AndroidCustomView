@@ -4,79 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/bubble_view_btn"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="气泡漂浮动画" />
-
-    <Button
-        android:id="@+id/wave_view_by_bezier_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="波浪动画--贝塞尔曲线实现" />
-
-    <Button
-        android:id="@+id/wave_view_by_sin_cos_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="波浪动画--正余弦函数实现" />
-
-    <Button
-        android:id="@+id/radar_view_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="水波（雷达）扩散效果" />
-
-    <Button
-        android:id="@+id/tag_view_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RecyclerView实现另类的Tag标签" />
-
-    <Button
-        android:id="@+id/animation_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="按钮自定义动画" />
-
-    <Button
-        android:id="@+id/pay_psd_view_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="自定义支付密码输入框" />
-
-    <Button
-        android:id="@+id/progress_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="自定义进度条" />
-
-    <Button
-        android:id="@+id/animation_view_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="使用的带动画的view" />
-
-    <Button
-        android:id="@+id/huawei_view_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="粘性小球" />
-
-    <Button
-        android:id="@+id/banner_view_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="banner" />
-
-    <Button
-        android:id="@+id/finger_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="指纹识别"
-        android:visibility="gone" />
-
+        android:layout_height="match_parent" />
 </LinearLayout>
 

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.allen.androidcustomview.R;
@@ -39,7 +38,7 @@ public class HoverItemActivity extends AppCompatActivity {
 
     private List<UserBean> userBeans = new ArrayList<>();
 
-    private String[] names = new String[]{"阿妹","打黑牛","张三","李四","王五","田鸡","孙五"};
+    private String[] names = new String[]{"阿妹", "打黑牛", "张三", "李四", "王五", "田鸡", "孙五"};
 
     /**
      * 汉字转换成拼音的类
@@ -51,6 +50,7 @@ public class HoverItemActivity extends AppCompatActivity {
     private PinyinComparator pinyinComparator;
 
     private LinearLayoutManager layoutManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +66,13 @@ public class HoverItemActivity extends AppCompatActivity {
         indexView = (IndexView) findViewById(R.id.index_view);
         showTextDialog = (TextView) findViewById(R.id.show_text_dialog);
 
-        layoutManager=new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        //一行代码实现吸顶悬浮的效果
         recyclerView.addItemDecoration(new HoverItemDecoration(this, new HoverItemDecoration.BindItemTextCallback() {
             @Override
             public String getItemText(int position) {
+                //悬浮的信息
                 return userBeans.get(position).getSortLetters();
             }
         }));
@@ -93,7 +95,7 @@ public class HoverItemActivity extends AppCompatActivity {
                 // 该字母首次出现的位置
                 int position = getPositionForSection(letter);
                 if (position != -1) {
-                    layoutManager.scrollToPositionWithOffset(position,0);
+                    layoutManager.scrollToPositionWithOffset(position, 0);
                     layoutManager.setStackFromEnd(false);
                 }
             }
@@ -114,7 +116,7 @@ public class HoverItemActivity extends AppCompatActivity {
         List<UserBean> userBeans = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             UserBean userBean = new UserBean();
-            userBean.setUserName(names[i%7]);
+            userBean.setUserName(names[i % 7]);
             userBeans.add(userBean);
         }
 
