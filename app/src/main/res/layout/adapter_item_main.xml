@@ -5,9 +5,10 @@
     android:orientation="vertical">
 
     <TextView
-        android:padding="15dp"
         android:id="@+id/title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:textSize="16sp" />
 </LinearLayout>

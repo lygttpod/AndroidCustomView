@@ -3,6 +3,7 @@ package com.allen.androidcustomview.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.adapter.ItemCenter2Adapter;
 import com.allen.androidcustomview.adapter.ItemCenterAdapter;
-import com.allen.androidcustomview.widget.DividerItemDecoration;
 import com.allen.androidcustomview.widget.ItemCenterRecyclerView;
 
 import java.util.ArrayList;
@@ -39,7 +39,6 @@ public class ItemCenterRVActivity extends AppCompatActivity {
 
         recyclerView = (ItemCenterRecyclerView) findViewById(R.id.recycler_view);
         recyclerView2 = (ItemCenterRecyclerView) findViewById(R.id.recycler_view_2);
-
 
         initRv(recyclerView);
         initRv(recyclerView2);

@@ -11,7 +11,7 @@ import com.allen.androidcustomview.R;
 import com.allen.androidcustomview.adapter.MainAdapter;
 import com.allen.androidcustomview.bean.TypeBean;
 import com.allen.androidcustomview.tagview.TagActivity;
-import com.allen.androidcustomview.widget.DividerItemDecoration;
+import com.allen.androidcustomview.widget.SuperDividerItemDecoration;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
@@ -32,12 +32,15 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
 
         adapter = new MainAdapter(getData());
         adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.addItemDecoration(new SuperDividerItemDecoration.Builder(this)
+                .setDividerWidth(5)
+                .setDividerColor(getResources().getColor(R.color.colorAccent))
+                .build());
         recyclerView.setAdapter(adapter);
     }
 
