@@ -1,3 +1,9 @@
+## 如有问题可以加群讨论
+<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=33dacdd367ca0b5a9ba96a196a6658666b442b3ec528850e377d50f3d607f26b"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="STV&amp;RxHttp交流群" title="STV&amp;RxHttp交流群"></a>
+
+或者手动加QQ群：688433795
+
+## Demo示例下载
 ![demo下载](https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/res/mipmap-xxhdpi/app_download.png?raw=true)
 
 # [**炫酷的提交按钮**](https://github.com/lygttpod/AndroidCustomView/blob/master/animation_button.md)
