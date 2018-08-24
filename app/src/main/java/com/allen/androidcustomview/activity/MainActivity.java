@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
             case 11:
                 startActivity(new Intent(MainActivity.this, HoverItemActivity.class));
                 break;
+            default:
+
         }
     }
 }

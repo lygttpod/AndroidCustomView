@@ -34,7 +34,6 @@
         <activity android:name=".activity.FingerprintActivity" />
         <activity android:name=".activity.BannerActivity" />
         <activity android:name=".activity.HoverItemActivity"/>
-        <activity android:name=".activity.ItemCenterRVActivity"/>
     </application>
 
 </manifest>
