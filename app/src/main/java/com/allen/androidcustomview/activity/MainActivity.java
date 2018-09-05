@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
         adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new SuperDividerItemDecoration.Builder(this)
-                .setDividerWidth(5)
-                .setDividerColor(getResources().getColor(R.color.colorAccent))
                 .build());
         recyclerView.setAdapter(adapter);
     }
@@ -57,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
         typeBeans.add(new TypeBean("粘性小球", 9));
         typeBeans.add(new TypeBean("banner", 10));
         typeBeans.add(new TypeBean("吸顶效果--一行代码实现", 11));
+        typeBeans.add(new TypeBean("揭露动画", 12));
         return typeBeans;
     }
 
@@ -98,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 break;
             case 11:
                 startActivity(new Intent(MainActivity.this, HoverItemActivity.class));
+                break;
+            case 12:
+                startActivity(new Intent(MainActivity.this, RevealAnimationActivity.class));
                 break;
             default:
 
