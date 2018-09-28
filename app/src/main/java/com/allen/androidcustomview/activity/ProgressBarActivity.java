@@ -68,7 +68,7 @@ public class ProgressBarActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingLineView.stopLoading();
+                loadingLineView.startLoading();
                 loadingView.startAnimation();
                 horizontalProgressBar.setProgressWithAnimation(100);
                 productProgressBar.setProgress(100);
