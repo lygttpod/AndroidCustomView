@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
         typeBeans.add(new TypeBean("banner", 10));
         typeBeans.add(new TypeBean("吸顶效果--一行代码实现", 11));
         typeBeans.add(new TypeBean("揭露动画", 12));
+        typeBeans.add(new TypeBean("支付宝首页效果", 13));
         return typeBeans;
     }
 
@@ -100,6 +101,9 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 break;
             case 12:
                 startActivity(new Intent(MainActivity.this, RevealAnimationActivity.class));
+                break;
+            case 13:
+                startActivity(new Intent(MainActivity.this, AliPayHomeActivity.class));
                 break;
             default:
 

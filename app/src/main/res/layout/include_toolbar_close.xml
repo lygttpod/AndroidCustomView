@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/aliPay_bar_color">
+
+    <ImageView
+        android:id="@+id/close_scan_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:src="@mipmap/ic_scan" />
+
+    <ImageView
+        android:id="@+id/close_pay_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/close_scan_iv"
+        android:src="@mipmap/ic_payment" />
+
+    <ImageView
+        android:id="@+id/close_charge_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/close_pay_iv"
+        android:src="@mipmap/ic_transfer" />
+
+    <ImageView
+        android:id="@+id/close_card_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/close_charge_iv"
+        android:src="@mipmap/ic_card" />
+
+    <ImageView
+        android:id="@+id/close_add_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/ic_add" />
+
+    <View
+        android:id="@+id/bg_toolbar_close"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

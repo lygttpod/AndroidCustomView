@@ -19,4 +19,7 @@
 
     <color name="wave_start2">#80FF7E37</color>
     <color name="wave_end2">#80EB4438</color>
+    <color name="white">#ffffff</color>
+    <color name="aliPay_bar_color">#1983d1</color>
+    <color name="aliPay_search_bg_color">#11222222</color>
 </resources>
