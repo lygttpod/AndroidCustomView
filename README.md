@@ -33,3 +33,7 @@
 
 # [**一行代码实现吸顶悬停效果**]
 ![吸顶悬停.gif](http://osnoex6vf.bkt.clouddn.com/hover_view.gif)
+
+# [**支付宝首页效果**]
+![支付宝首页效果.gif](http://osnoex6vf.bkt.clouddn.com/alipay_home.gif)
+
