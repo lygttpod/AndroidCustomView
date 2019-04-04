@@ -3,7 +3,6 @@ package com.allen.androidcustomview.listener
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +45,11 @@ class OnDragTouchListener : View.OnTouchListener {
     //吸附在边缘时候距离边界的距离
     var mBorderMargin = 0f
 
-    @SuppressLint("ClickableViewAccessibility")
+    var mBorderMarginLeft = -1f
+    var mBorderMarginRight = -1f
+    var mBorderMarginTop = -1f
+    var mBorderMarginBottom = -1f
+
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -96,6 +99,8 @@ class OnDragTouchListener : View.OnTouchListener {
                     setAutoToBorder(view)
                 }
                 view.parent.requestDisallowInterceptTouchEvent(false)
+                //调取performClick()方法消除警告OnDragTouchListener#onTouch should call View#performClick when a click is detected more...
+                view.performClick()
             }
         }
         return true
@@ -129,12 +134,12 @@ class OnDragTouchListener : View.OnTouchListener {
      */
     private fun getLeftOrRightAnimation(v: View): Animator {
         //当用户拖拽完后，让控件回到最近的边缘
-        var leftAndRightEnd = mBorderMargin
+        var leftOrRightEnd = getBorderMargin(mBorderMarginLeft)
         //吸附在右边边界处
         if (left + v.width / 2 >= mMaxWidth / 2) {
-            leftAndRightEnd = (mMaxWidth - v.width - mBorderMargin)
+            leftOrRightEnd = (mMaxWidth - v.width - getBorderMargin(mBorderMarginRight))
         }
-        val animator = ValueAnimator.ofFloat(left.toFloat(), leftAndRightEnd)
+        val animator = ValueAnimator.ofFloat(left.toFloat(), leftOrRightEnd)
         animator.interpolator = DecelerateInterpolator()
         animator.addUpdateListener { animation ->
             val leftMargin = (animation.animatedValue as Float).toInt()
@@ -154,17 +159,18 @@ class OnDragTouchListener : View.OnTouchListener {
         return when {
             //吸附到距离底部mBorderMargin的距离的位置
             top + v.height >= mMaxHeight - mBorderMargin -> {
-                topOrBottomEnd = mMaxHeight - v.height - mBorderMargin
+                topOrBottomEnd = mMaxHeight - v.height - getBorderMargin(mBorderMarginBottom)
                 createTopOrBottomAnimation(v, topOrBottomEnd)
             }
             //吸附到距离顶部mBorderMargin的距离的位置
             top <= mBorderMargin -> {
-                topOrBottomEnd = mBorderMargin
+                topOrBottomEnd = getBorderMargin(mBorderMarginTop)
                 createTopOrBottomAnimation(v, topOrBottomEnd)
             }
             else -> null
         }
     }
+
 
     /**
      * 创建底吸附到底部或顶部的动画
@@ -180,5 +186,11 @@ class OnDragTouchListener : View.OnTouchListener {
         return animator
     }
 
+    /**
+     * 获取吸附的边界值
+     */
+    private fun getBorderMargin(margin: Float): Float {
+        return if (margin != -1f) margin else mBorderMargin
+    }
 
 }
