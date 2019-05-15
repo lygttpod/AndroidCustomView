@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="50dp"
     tools:context="com.allen.androidcustomview.activity.PayPsdViewActivity">
 
     <com.allen.androidcustomview.widget.PayPsdInputView
         android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="@color/colorAccent"
         android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
         android:inputType="number"
         psd:maxCount="6"
         psd:psdType="weChat"
@@ -20,7 +21,7 @@
 
     <com.allen.androidcustomview.widget.PayPsdInputView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:inputType="number"

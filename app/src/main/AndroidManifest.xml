@@ -36,6 +36,7 @@
         <activity android:name=".activity.HoverItemActivity"/>
         <activity android:name=".activity.RevealAnimationActivity" />
         <activity android:name=".activity.AliPayHomeActivity" />
+        <activity android:name=".activity.RecyclerViewItemAnimActivity" />
     </application>
 
 </manifest>

@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), BaseQuickAdapter.OnItemClickListener {
             typeBeans.add(TypeBean("吸顶效果--一行代码实现", 11))
             typeBeans.add(TypeBean("揭露动画", 12))
             typeBeans.add(TypeBean("支付宝首页效果", 13))
+            typeBeans.add(TypeBean("RecyclerView的item动画", 14))
             return typeBeans
         }
 
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity(), BaseQuickAdapter.OnItemClickListener {
             11 -> startActivity(Intent(this@MainActivity, HoverItemActivity::class.java))
             12 -> startActivity(Intent(this@MainActivity, RevealAnimationActivity::class.java))
             13 -> startActivity(Intent(this@MainActivity, AliPayHomeActivity::class.java))
+            14 -> startActivity(Intent(this@MainActivity, RecyclerViewItemAnimActivity::class.java))
         }
     }
 }
