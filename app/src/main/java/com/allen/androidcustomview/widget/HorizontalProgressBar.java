@@ -345,6 +345,7 @@ public class HorizontalProgressBar extends View {
                     moveDis = currentProgress - tipWidth / 2;
                 }
                 invalidate();
+                setCurrentProgress(value);
             }
         });
         progressAnimator.start();
@@ -373,6 +374,15 @@ public class HorizontalProgressBar extends View {
         mProgress = progress;
         currentProgress = progress * mWidth / 100;
         textString = formatNum(format2Int(progress));
+
+        //移动百分比提示框，只有当前进度到提示框中间位置之后开始移动，
+        //当进度框移动到最右边的时候停止移动，但是进度条还可以继续移动
+        //moveDis是tip框移动的距离
+        if (currentProgress >= (tipWidth / 2) &&
+                currentProgress <= (mWidth - tipWidth / 2)) {
+            moveDis = currentProgress - tipWidth / 2;
+        }
+
         invalidate();
         return this;
     }
