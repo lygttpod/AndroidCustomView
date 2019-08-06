@@ -37,6 +37,8 @@
         <activity android:name=".activity.RevealAnimationActivity" />
         <activity android:name=".activity.AliPayHomeActivity" />
         <activity android:name=".activity.RecyclerViewItemAnimActivity" />
+        <activity android:name=".activity.PathActivity" />
+        <activity android:name=".activity.SinaVoteActivity" />
     </application>
 
 </manifest>

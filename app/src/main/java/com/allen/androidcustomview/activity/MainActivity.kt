@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity(), BaseQuickAdapter.OnItemClickListener {
             typeBeans.add(TypeBean("揭露动画", 12))
             typeBeans.add(TypeBean("支付宝首页效果", 13))
             typeBeans.add(TypeBean("RecyclerView的item动画", 14))
+            typeBeans.add(TypeBean("路径path动画", 15))
+            typeBeans.add(TypeBean("仿新浪投票控件", 16))
             return typeBeans
         }
 
@@ -80,6 +82,8 @@ class MainActivity : AppCompatActivity(), BaseQuickAdapter.OnItemClickListener {
             12 -> startActivity(Intent(this@MainActivity, RevealAnimationActivity::class.java))
             13 -> startActivity(Intent(this@MainActivity, AliPayHomeActivity::class.java))
             14 -> startActivity(Intent(this@MainActivity, RecyclerViewItemAnimActivity::class.java))
+            15 -> startActivity(Intent(this@MainActivity, PathActivity::class.java))
+            16 -> startActivity(Intent(this@MainActivity, SinaVoteActivity::class.java))
         }
     }
 }
