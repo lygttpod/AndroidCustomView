@@ -10,7 +10,7 @@
         <attr name="divideLineWidth" format="dimension" />
         <attr name="divideLineColor" format="color" />
         <attr name="rectAngle" format="dimension" />
-        <attr name="focusedColor" format="color"/>
+        <attr name="focusedColor" format="color" />
         <attr name="psdType" format="enum">
             <enum name="weChat" value="0" />
             <enum name="bottomLine" value="1" />
@@ -29,8 +29,8 @@
 
         <attr name="isDrawCenterProgressText" format="boolean" />
 
-        <attr name="centerProgressTextColor" format="color"/>
-        <attr name="centerProgressTextSize" format="dimension"/>
+        <attr name="centerProgressTextColor" format="color" />
+        <attr name="centerProgressTextSize" format="dimension" />
 
     </declare-styleable>
 
@@ -59,4 +59,32 @@
         </attr>
 
     </declare-styleable>
+    <declare-styleable name="ArcView">
+        <attr name="arcHeight" format="dimension" />
+        <attr name="bgColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CarMoveView">
+        <attr name="carMovePathColor" format="color" />
+        <attr name="carMoveDrawableRes" format="reference" />
+        <attr name="carMoveDuration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="VoteView">
+        <attr name="voteBorderRadius" format="dimension" />
+        <attr name="voteProgressBgColor" format="color" />
+        <attr name="voteUncheckedProgressColor" format="color" />
+        <attr name="voteCheckedProgressColor" format="color" />
+        <attr name="voteCheckedContentTextColor" format="color" />
+        <attr name="voteUncheckedContentTextColor" format="color" />
+        <attr name="voteCheckedResultTextColor" format="color" />
+        <attr name="voteUncheckedResultTextColor" format="color" />
+        <attr name="voteTextSize" format="dimension"/>
+        <attr name="voteBorderColor" format="color" />
+        <attr name="voteCheckedIcon" format="reference" />
+        <attr name="voteAnimDuration" format="integer" />
+        <attr name="voteRightIconWidth" format="dimension" />
+        <attr name="voteRightIconHeight" format="dimension" />
+    </declare-styleable>
+
 </resources>

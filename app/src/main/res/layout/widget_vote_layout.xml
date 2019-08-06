@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
+
+    <View
+        android:id="@+id/top_bg_view"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#F4F4FA" />
+
+    <TextView
+        android:id="@+id/vote_container_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:textColor="#1a1a1a"
+        android:textSize="19dp"
+        tools:text="你支持科创板吗？(多选)" />
+
+    <LinearLayout
+        android:id="@+id/vote_item_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/vote_container_vote_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textColor="#999999"
+        android:textSize="13dp"
+        android:visibility="gone"
+        tools:text="3.5万人参与"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/vote_container_vote_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/shape_vote_item_bg"
+        android:gravity="center"
+        android:text="投票"
+        android:textColor="#1a1a1a"
+        android:textSize="17dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>
