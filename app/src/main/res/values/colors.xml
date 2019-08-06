@@ -22,4 +22,14 @@
     <color name="white">#ffffff</color>
     <color name="aliPay_bar_color">#1983d1</color>
     <color name="aliPay_search_bg_color">#11222222</color>
+
+
+    <color name="border_color">#e6e6e6</color>
+    <color name="checked_progress_color">#1AFF7C05</color>
+    <color name="unchecked_progress_color">#F3F3F3</color>
+    <color name="unchecked_content_text_color">#1a1a1a</color>
+    <color name="checked_content_text_color">#FF7C05</color>
+    <color name="unchecked_result_text_color">#333333</color>
+    <color name="checked_result_text_color">#FF7C05</color>
+
 </resources>
