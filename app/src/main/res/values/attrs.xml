@@ -87,4 +87,14 @@
         <attr name="voteRightIconHeight" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="StudyPlanProgressView">
+        <attr name="sppv_iconChecked" format="reference"/>
+        <attr name="sppv_iconUnchecked" format="reference"/>
+        <attr name="sppv_iconSize" format="dimension"/>
+        <attr name="sppv_uncheckedProgressColor" format="color"/>
+        <attr name="sppv_checkedProgressColor" format="color"/>
+        <attr name="sppv_progressWidth" format="dimension"/>
+        <attr name="sppv_textSize" format="dimension"/>
+        <attr name="sppv_textColor" format="color"/>
+    </declare-styleable>
 </resources>

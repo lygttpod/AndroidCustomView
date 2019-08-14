@@ -32,4 +32,8 @@
     <color name="unchecked_result_text_color">#333333</color>
     <color name="checked_result_text_color">#FF7C05</color>
 
+    <color name="color_333333">#333333</color>
+    <color name="color_E2E2E2">#E2E2E2</color>
+    <color name="color_ffd500">#FFD500</color>
+
 </resources>

@@ -13,6 +13,10 @@ import com.allen.androidcustomview.widget.HorizontalProgressBar;
 import com.allen.androidcustomview.widget.LoadingLineView;
 import com.allen.androidcustomview.widget.LoadingView;
 import com.allen.androidcustomview.widget.ProductProgressBar;
+import com.allen.androidcustomview.widget.StudyPlanProgressView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProgressBarActivity extends AppCompatActivity {
 
@@ -24,6 +28,7 @@ public class ProgressBarActivity extends AppCompatActivity {
     LoadingLineView loadingLineView;
 
     Button button;
+    StudyPlanProgressView studyPlanProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class ProgressBarActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.progress_tv);
         button = (Button) findViewById(R.id.startAnimationBtn);
+        studyPlanProgressView = findViewById(R.id.study_plan_progress_view);
 
         circleProgressBarView.setProgressWithAnimation(60);
         circleProgressBarView.setProgressListener(new CircleProgressBarView.ProgressListener() {
@@ -79,8 +85,25 @@ public class ProgressBarActivity extends AppCompatActivity {
                         textView.setText("当前进度：" + currentProgress);
                     }
                 });
+                studyPlanProgressView.setData(getPlanData(true));
             }
         });
+        studyPlanProgressView.setData(getPlanData(false));
+
+    }
+
+    private List<String> getPlanData(Boolean isAll) {
+        List<String> list = new ArrayList<>();
+        list.add("08月10日");
+        list.add("08月11日");
+        list.add("08月12日");
+        list.add("08月13日");
+        if (isAll) {
+            list.add("08月14日");
+            list.add("08月15日");
+            list.add("08月16日");
+        }
+        return list;
     }
 
     @Override

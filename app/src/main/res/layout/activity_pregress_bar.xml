@@ -44,6 +44,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp" />
 
+    <com.allen.androidcustomview.widget.StudyPlanProgressView
+        android:id="@+id/study_plan_progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        cpbv:sppv_checkedProgressColor="@color/color_ffd500"
+        cpbv:sppv_iconChecked="@mipmap/icon_study_progress_completed"
+        cpbv:sppv_iconSize="14dp"
+        cpbv:sppv_iconUnchecked="@mipmap/icon_study_progress_not_check"
+        cpbv:sppv_progressWidth="2dp"
+        cpbv:sppv_textColor="@color/color_333333"
+        cpbv:sppv_uncheckedProgressColor="@color/color_E2E2E2" />
+
     <Button
         android:id="@+id/startAnimationBtn"
         android:layout_width="match_parent"
