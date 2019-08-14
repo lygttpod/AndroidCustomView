@@ -259,6 +259,7 @@ class VoteContainerView @JvmOverloads constructor(context: Context, attrs: Attri
                 .setVoteBorderRadius(voteView.dp2px(3f))
                 .setVoteBorderColor(resources.getColor(R.color.border_color))
                 .setVoteRightIconSize(voteView.dp2px(18f).toInt())
+                .setVoteAnimDuration(2000L)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             voteView.clipToOutline = true
             voteView.outlineProvider = object : ViewOutlineProvider() {
