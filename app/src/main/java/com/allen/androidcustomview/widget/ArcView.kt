@@ -28,7 +28,6 @@ class ArcView : View {
     private var mPaint = Paint()
     private var mContext: Context? = null
 
-    private var mRect = Rect()
     private var mPath = Path()
 
     constructor(context: Context) : this(context, null)
@@ -44,29 +43,30 @@ class ArcView : View {
         typedArray.recycle()
 
         mContext = context
-        mPaint.style = Paint.Style.FILL
+        mPaint.style = Paint.Style.FILL_AND_STROKE
         mPaint.color = mBgColor
         mPaint.isAntiAlias = true
+        mPaint.strokeWidth = 1f
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         mWidth = w
         mHeight = h
-        mRect.set(0, 0, mWidth, mHeight - mArcHeight)
         resetPath()
     }
 
     private fun resetPath() {
         mPath.reset()
-        mPath.moveTo(0f, (mHeight - mArcHeight).toFloat())
+        mPath.moveTo(0f, 0f)
+        mPath.lineTo(0f, (mHeight - mArcHeight).toFloat())
         mPath.quadTo((mWidth / 2).toFloat(), (mHeight + mArcHeight).toFloat(), mWidth.toFloat(), (mHeight - mArcHeight).toFloat())
+        mPath.lineTo(mWidth.toFloat(), 0f)
         mPath.close()
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        canvas?.drawRect(mRect, mPaint)
         canvas?.drawPath(mPath, mPaint)
     }
 
@@ -81,7 +81,6 @@ class ArcView : View {
     fun setArcViewHeight(height: Int) {
         if (height == mHeight) return
         mHeight = height
-        mRect.set(0, 0, mWidth, mHeight - mArcHeight)
         resetPath()
         invalidate()
     }
