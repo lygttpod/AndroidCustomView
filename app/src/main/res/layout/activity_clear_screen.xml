@@ -22,5 +22,19 @@
             android:gravity="center"
             android:scaleType="fitXY"
             android:src="@mipmap/live_bg" />
+
+        <Button
+            android:id="@+id/btn_quick_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="快滑清屏模式" />
+
+        <Button
+            android:id="@+id/btn_slow_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="慢滑清屏模式" />
     </FrameLayout>
 </com.allen.androidcustomview.widget.ClearScreenView>
