@@ -31,7 +31,12 @@ enum class ClearScreenStatus {
     CLEARED//已经清屏状态
 }
 
-class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(mContext, attrs, defStyleAttr) {
+enum class ClearScreenMode {
+    QUICK_SCROLL,//快速滑动才触发清屏
+    SLOW_SCROLL//滑动出发清屏
+}
+
+class ClearScreenView @JvmOverloads constructor(private val mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(mContext, attrs, defStyleAttr) {
 
     companion object {
         /**
@@ -100,6 +105,16 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
      */
     private var clearScreenStatus = ClearScreenStatus.NORMAL
 
+    /**
+     * 清屏模式
+     */
+    var clearScreenMode = ClearScreenMode.QUICK_SCROLL
+
+    /**
+     * 是否正在处在滑动清屏状态
+     */
+    private var isScrolling = false
+
     init {
         initView()
         initAnim()
@@ -132,6 +147,7 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
                         clearScreenListener?.onCleared()
                     }
                 }
+                isScrolling = false
             }
         })
     }
@@ -147,15 +163,23 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
                 mDownX = x
                 mDownY = y
             }
-            MotionEvent.ACTION_MOVE -> {
-                return isInterceptClearScreenEvent(x, y)
-            }
         }
-        return super.onInterceptTouchEvent(ev)
+        return isInterceptClearScreenEvent(x, y)
     }
 
     private fun isInterceptClearScreenEvent(x: Int, y: Int): Boolean {
-        return isMoveForHorizontal(x, y) && !isAnimRunning() && isGreaterThanMinSize(mDownX, x)
+        return when (clearScreenMode) {
+            ClearScreenMode.QUICK_SCROLL -> {
+                val isIntercept = isMoveForHorizontal(x, y) && !isAnimRunning() && isGreaterThanMinSize(mDownX, x)
+                requestDisallowInterceptTouchEvent(isIntercept)
+                isIntercept
+            }
+            ClearScreenMode.SLOW_SCROLL -> {
+                val isIntercept = isMoveForHorizontal(x, y) && !isAnimRunning() || isScrolling
+                requestDisallowInterceptTouchEvent(isIntercept)
+                isIntercept
+            }
+        }
     }
 
     /**
@@ -170,8 +194,20 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (isAnimRunning()) return true
+        when (clearScreenMode) {
+            ClearScreenMode.QUICK_SCROLL -> {
+                handleQuickScrollMode(event)
+            }
+            ClearScreenMode.SLOW_SCROLL -> {
+                handleSlowScrollMode(event)
+            }
+        }
+        return true
+    }
+
+    private fun handleQuickScrollMode(event: MotionEvent) {
         mVelocityTracker?.addMovement(event)
-        val x = event.x.toInt()
         when (event.action) {
             MotionEvent.ACTION_UP -> {
                 mVelocityTracker?.computeCurrentVelocity(10)
@@ -192,11 +228,58 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
                 if (translateX != 0) {
                     mAnimator?.start()
                 }
-                return true
             }
         }
+    }
 
-        return super.onTouchEvent(event)
+    private fun handleSlowScrollMode(event: MotionEvent) {
+        val x = event.x.toInt()
+        when (event.action) {
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                when (clearScreenStatus) {
+                    ClearScreenStatus.NORMAL -> {
+                        if (startTranslateX >= width / 2) {
+                            translateX = width - startTranslateX
+                            clearScreenStatus = ClearScreenStatus.NORMAL
+                        } else {
+                            translateX = -startTranslateX
+                            clearScreenStatus = ClearScreenStatus.CLEARED
+                        }
+                        mAnimator?.start()
+                    }
+                    ClearScreenStatus.CLEARED -> {
+                        if (startTranslateX >= width / 2) {
+                            translateX = width - startTranslateX
+                            clearScreenStatus = ClearScreenStatus.NORMAL
+                        } else {
+                            translateX = (-startTranslateX)
+                            clearScreenStatus = ClearScreenStatus.CLEARED
+                        }
+                        mAnimator?.start()
+                    }
+                }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                translateX = 0
+                val move = x - mDownX
+                when (clearScreenStatus) {
+                    ClearScreenStatus.NORMAL -> {
+                        val translate = if (x <= mDownX) 0 else move
+                        startTranslateX = translate
+                        if (translate != 0) {
+                            translateChild(translate.toFloat())
+                        }
+                    }
+                    ClearScreenStatus.CLEARED -> {
+                        val translate = if (x > mDownX) 0 else mDownX - x
+                        startTranslateX = width - translate
+                        if (startTranslateX != 0) {
+                            translateChild(startTranslateX.toFloat())
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun setLeft2RightMoveTranslateX() {
@@ -246,6 +329,7 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
     }
 
     private fun translateChild(translate: Float) {
+        isScrolling = true
         for (view in listClearViews) {
             view.translationX = translate
         }
