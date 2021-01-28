@@ -1,4 +1,4 @@
-package com.spero.vision.vsnapp.support.widget.live
+package com.allen.androidcustomview.widget
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -10,15 +10,14 @@ import android.view.VelocityTracker
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.ytx.logutil.YtxLog
 import kotlin.math.abs
 
 
 /**
  * <pre>
  *      @author : Allen
- *      e-mail  : yagang.li@yintech.cn
- *      date    : 2020/03/27
+ *      e-mail  : lygttpod@163.com
+ *      date    : 2021/01/28
  *      desc    : 滑动清屏view
  * </pre>
  */
@@ -177,7 +176,6 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
             MotionEvent.ACTION_UP -> {
                 mVelocityTracker?.computeCurrentVelocity(10)
                 val xVelocity = mVelocityTracker?.xVelocity ?: 0f
-                YtxLog.d("ClearScreenViw", "onTouchEvent------xVelocity=$xVelocity")
                 when {
                     //从左往右滑动(是正数)速度大于阈值
                     xVelocity > MIN_X_VELOCITY -> {
@@ -258,6 +256,12 @@ class ClearScreenView @JvmOverloads constructor(val mContext: Context, attrs: At
             if (!listClearViews.contains(view)) {
                 listClearViews.add(view)
             }
+        }
+    }
+
+    fun addClearView(view: View) {
+        if (!listClearViews.contains(view)) {
+            listClearViews.add(view)
         }
     }
 

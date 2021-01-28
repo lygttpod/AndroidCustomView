@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), BaseQuickAdapter.OnItemClickListener {
             typeBeans.add(TypeBean("RecyclerView的item动画", 14))
             typeBeans.add(TypeBean("路径path动画", 15))
             typeBeans.add(TypeBean("仿新浪投票控件", 16))
+            typeBeans.add(TypeBean("直播侧滑清屏效果", 17))
             return typeBeans
         }
 
@@ -84,6 +85,7 @@ class MainActivity : AppCompatActivity(), BaseQuickAdapter.OnItemClickListener {
             14 -> startActivity(Intent(this@MainActivity, RecyclerViewItemAnimActivity::class.java))
             15 -> startActivity(Intent(this@MainActivity, PathActivity::class.java))
             16 -> startActivity(Intent(this@MainActivity, SinaVoteActivity::class.java))
+            17 -> startActivity(Intent(this@MainActivity, ClearScreenActivity::class.java))
         }
     }
 }
