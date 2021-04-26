@@ -5,7 +5,7 @@
 或者手动加QQ群：688433795
 
 ## Demo示例下载
-![demo下载](https://github.com/lygttpod/AndroidCustomView/blob/master/app/src/main/res/mipmap-xxhdpi/app_download.png?raw=true)
+[点击下载demo体验](http://d.firim.top/whez)
 
 # [**炫酷的提交按钮**](https://github.com/lygttpod/AndroidCustomView/blob/master/animation_button.md)
 ![99.gif](http://upload-images.jianshu.io/upload_images/2057501-0d1119721429bf71.gif?imageMogr2/auto-orient/strip)
