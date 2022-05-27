@@ -12,7 +12,6 @@ import kotlin.math.min
 /**
  * <pre>
  *      @author : Allen
- *      e-mail  : yagang.li@yintech.cn
  *      date    : 2019/08/12
  *      desc    : 学习计划view
  * </pre>

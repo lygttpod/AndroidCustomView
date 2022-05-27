@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_clear_screen.*
 /**
  * <pre>
  *      author  : Allen
- *      e-mail  : yagang.li@yintech.cn
  *      date    : 2021/1/28
  *      desc    :
  * </pre>

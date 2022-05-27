@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_sina_vote.*
 /**
  * <pre>
  *      @author : Allen
- *      e-mail  : yagang.li@yintech.cn
  *      date    : 2019/08/06
  *      desc    :
  * </pre>

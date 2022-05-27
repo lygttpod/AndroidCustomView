@@ -4,7 +4,6 @@ package com.allen.androidcustomview.bean
 /**
  * <pre>
  *      @author : Allen
- *      e-mail  : yagang.li@yintech.cn
  *      date    : 2019/08/01
  *      desc    :
  * </pre>
